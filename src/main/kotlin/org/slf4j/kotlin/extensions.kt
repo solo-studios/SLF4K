@@ -25,12 +25,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 @file:Suppress("unused", "GrazieInspection")
 
 package org.slf4j.kotlin
 
-import org.slf4j.Logger
 import org.slf4j.Marker
 
 /**
@@ -39,7 +37,7 @@ import org.slf4j.Marker
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(crossinline message: () -> String) {
+inline fun KLogger.trace(crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message())
 }
@@ -53,7 +51,7 @@ inline fun Logger.trace(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("traceObject")
-inline fun Logger.trace(crossinline message: () -> Any?) {
+inline fun KLogger.trace(crossinline message: () -> Any?) {
     if (isTraceEnabled)
         trace(message().toString())
 }
@@ -71,7 +69,7 @@ inline fun Logger.trace(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.trace(arg: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), arg)
 }
@@ -90,7 +88,7 @@ inline fun Logger.trace(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.trace(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), arg1, arg2)
 }
@@ -111,7 +109,7 @@ inline fun Logger.trace(arg1: Any?, arg2: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.trace(vararg arguments: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), *arguments)
 }
@@ -124,7 +122,7 @@ inline fun Logger.trace(vararg arguments: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.trace(throwable: Throwable?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), throwable)
 }
@@ -140,7 +138,7 @@ inline fun Logger.trace(throwable: Throwable?, crossinline message: () -> String
  */
 @JvmSynthetic
 @JvmName("traceObject")
-inline fun Logger.trace(throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.trace(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isTraceEnabled)
         trace(message().toString(), throwable)
 }
@@ -152,7 +150,7 @@ inline fun Logger.trace(throwable: Throwable?, crossinline message: () -> Any?) 
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(marker: Marker?, crossinline message: () -> String) {
+inline fun KLogger.trace(marker: Marker?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message())
 }
@@ -167,7 +165,7 @@ inline fun Logger.trace(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("traceObject")
-inline fun Logger.trace(marker: Marker?, crossinline message: () -> Any?) {
+inline fun KLogger.trace(marker: Marker?, crossinline message: () -> Any?) {
     if (isTraceEnabled)
         trace(message().toString(), marker)
 }
@@ -181,7 +179,7 @@ inline fun Logger.trace(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.trace(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), arg)
 }
@@ -197,7 +195,7 @@ inline fun Logger.trace(marker: Marker?, arg: Any?, crossinline message: () -> S
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.trace(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), arg1, arg2)
 }
@@ -212,7 +210,7 @@ inline fun Logger.trace(marker: Marker?, arg1: Any?, arg2: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.trace(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), arguments)
 }
@@ -226,7 +224,7 @@ inline fun Logger.trace(marker: Marker?, vararg arguments: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.trace(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.trace(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), throwable)
 }
@@ -243,7 +241,7 @@ inline fun Logger.trace(marker: Marker?, throwable: Throwable?, crossinline mess
  */
 @JvmSynthetic
 @JvmName("traceObject")
-inline fun Logger.trace(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.trace(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isTraceEnabled)
         trace(message().toString(), marker, throwable)
 }
@@ -254,7 +252,7 @@ inline fun Logger.trace(marker: Marker?, throwable: Throwable?, crossinline mess
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(crossinline message: () -> String) {
+inline fun KLogger.debug(crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message())
 }
@@ -268,7 +266,7 @@ inline fun Logger.debug(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("debugObject")
-inline fun Logger.debug(crossinline message: () -> Any?) {
+inline fun KLogger.debug(crossinline message: () -> Any?) {
     if (isDebugEnabled)
         debug(message().toString())
 }
@@ -286,7 +284,7 @@ inline fun Logger.debug(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.debug(arg: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), arg)
 }
@@ -305,7 +303,7 @@ inline fun Logger.debug(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.debug(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), arg1, arg2)
 }
@@ -327,7 +325,7 @@ inline fun Logger.debug(arg1: Any?, arg2: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.debug(vararg arguments: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), *arguments)
 }
@@ -340,7 +338,7 @@ inline fun Logger.debug(vararg arguments: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.debug(throwable: Throwable?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), throwable)
 }
@@ -356,7 +354,7 @@ inline fun Logger.debug(throwable: Throwable?, crossinline message: () -> String
  */
 @JvmSynthetic
 @JvmName("debugObject")
-inline fun Logger.debug(throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.debug(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isDebugEnabled)
         debug(message().toString(), throwable)
 }
@@ -368,7 +366,7 @@ inline fun Logger.debug(throwable: Throwable?, crossinline message: () -> Any?) 
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(marker: Marker?, crossinline message: () -> String) {
+inline fun KLogger.debug(marker: Marker?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message())
 }
@@ -383,7 +381,7 @@ inline fun Logger.debug(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("debugObject")
-inline fun Logger.debug(marker: Marker?, crossinline message: () -> Any?) {
+inline fun KLogger.debug(marker: Marker?, crossinline message: () -> Any?) {
     if (isDebugEnabled)
         debug(message().toString(), marker)
 }
@@ -397,7 +395,7 @@ inline fun Logger.debug(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.debug(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), arg)
 }
@@ -413,7 +411,7 @@ inline fun Logger.debug(marker: Marker?, arg: Any?, crossinline message: () -> S
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.debug(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), arg1, arg2)
 }
@@ -428,7 +426,7 @@ inline fun Logger.debug(marker: Marker?, arg1: Any?, arg2: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.debug(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), arguments)
 }
@@ -442,7 +440,7 @@ inline fun Logger.debug(marker: Marker?, vararg arguments: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.debug(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.debug(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), throwable)
 }
@@ -459,7 +457,7 @@ inline fun Logger.debug(marker: Marker?, throwable: Throwable?, crossinline mess
  */
 @JvmSynthetic
 @JvmName("debugObject")
-inline fun Logger.debug(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.debug(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isDebugEnabled)
         debug(message().toString(), marker, throwable)
 }
@@ -470,7 +468,7 @@ inline fun Logger.debug(marker: Marker?, throwable: Throwable?, crossinline mess
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(crossinline message: () -> String) {
+inline fun KLogger.info(crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message())
 }
@@ -484,7 +482,7 @@ inline fun Logger.info(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("infoObject")
-inline fun Logger.info(crossinline message: () -> Any?) {
+inline fun KLogger.info(crossinline message: () -> Any?) {
     if (isInfoEnabled)
         info(message().toString())
 }
@@ -502,7 +500,7 @@ inline fun Logger.info(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.info(arg: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), arg)
 }
@@ -521,7 +519,7 @@ inline fun Logger.info(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.info(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), arg1, arg2)
 }
@@ -543,7 +541,7 @@ inline fun Logger.info(arg1: Any?, arg2: Any?, crossinline message: () -> String
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.info(vararg arguments: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), *arguments)
 }
@@ -556,7 +554,7 @@ inline fun Logger.info(vararg arguments: Any?, crossinline message: () -> String
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.info(throwable: Throwable?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), throwable)
 }
@@ -572,7 +570,7 @@ inline fun Logger.info(throwable: Throwable?, crossinline message: () -> String)
  */
 @JvmSynthetic
 @JvmName("infoObject")
-inline fun Logger.info(throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.info(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isInfoEnabled)
         info(message().toString(), throwable)
 }
@@ -584,7 +582,7 @@ inline fun Logger.info(throwable: Throwable?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(marker: Marker?, crossinline message: () -> String) {
+inline fun KLogger.info(marker: Marker?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message())
 }
@@ -599,7 +597,7 @@ inline fun Logger.info(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("infoObject")
-inline fun Logger.info(marker: Marker?, crossinline message: () -> Any?) {
+inline fun KLogger.info(marker: Marker?, crossinline message: () -> Any?) {
     if (isInfoEnabled)
         info(message().toString(), marker)
 }
@@ -613,7 +611,7 @@ inline fun Logger.info(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.info(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), arg)
 }
@@ -629,7 +627,7 @@ inline fun Logger.info(marker: Marker?, arg: Any?, crossinline message: () -> St
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.info(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), arg1, arg2)
 }
@@ -644,7 +642,7 @@ inline fun Logger.info(marker: Marker?, arg1: Any?, arg2: Any?, crossinline mess
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.info(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), arguments)
 }
@@ -658,7 +656,7 @@ inline fun Logger.info(marker: Marker?, vararg arguments: Any?, crossinline mess
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.info(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.info(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), throwable)
 }
@@ -675,7 +673,7 @@ inline fun Logger.info(marker: Marker?, throwable: Throwable?, crossinline messa
  */
 @JvmSynthetic
 @JvmName("infoObject")
-inline fun Logger.info(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.info(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isInfoEnabled)
         info(message().toString(), marker, throwable)
 }
@@ -686,7 +684,7 @@ inline fun Logger.info(marker: Marker?, throwable: Throwable?, crossinline messa
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(crossinline message: () -> String) {
+inline fun KLogger.warn(crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message())
 }
@@ -700,7 +698,7 @@ inline fun Logger.warn(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("warnObject")
-inline fun Logger.warn(crossinline message: () -> Any?) {
+inline fun KLogger.warn(crossinline message: () -> Any?) {
     if (isWarnEnabled)
         warn(message().toString())
 }
@@ -718,7 +716,7 @@ inline fun Logger.warn(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.warn(arg: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), arg)
 }
@@ -737,7 +735,7 @@ inline fun Logger.warn(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.warn(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), arg1, arg2)
 }
@@ -759,7 +757,7 @@ inline fun Logger.warn(arg1: Any?, arg2: Any?, crossinline message: () -> String
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.warn(vararg arguments: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), *arguments)
 }
@@ -772,7 +770,7 @@ inline fun Logger.warn(vararg arguments: Any?, crossinline message: () -> String
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.warn(throwable: Throwable?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), throwable)
 }
@@ -788,7 +786,7 @@ inline fun Logger.warn(throwable: Throwable?, crossinline message: () -> String)
  */
 @JvmSynthetic
 @JvmName("warnObject")
-inline fun Logger.warn(throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.warn(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isWarnEnabled)
         warn(message().toString(), throwable)
 }
@@ -800,7 +798,7 @@ inline fun Logger.warn(throwable: Throwable?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(marker: Marker?, crossinline message: () -> String) {
+inline fun KLogger.warn(marker: Marker?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message())
 }
@@ -815,7 +813,7 @@ inline fun Logger.warn(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("warnObject")
-inline fun Logger.warn(marker: Marker?, crossinline message: () -> Any?) {
+inline fun KLogger.warn(marker: Marker?, crossinline message: () -> Any?) {
     if (isWarnEnabled)
         warn(message().toString(), marker)
 }
@@ -829,7 +827,7 @@ inline fun Logger.warn(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.warn(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), arg)
 }
@@ -845,7 +843,7 @@ inline fun Logger.warn(marker: Marker?, arg: Any?, crossinline message: () -> St
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.warn(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), arg1, arg2)
 }
@@ -860,7 +858,7 @@ inline fun Logger.warn(marker: Marker?, arg1: Any?, arg2: Any?, crossinline mess
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.warn(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), arguments)
 }
@@ -874,7 +872,7 @@ inline fun Logger.warn(marker: Marker?, vararg arguments: Any?, crossinline mess
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.warn(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.warn(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), throwable)
 }
@@ -891,7 +889,7 @@ inline fun Logger.warn(marker: Marker?, throwable: Throwable?, crossinline messa
  */
 @JvmSynthetic
 @JvmName("warnObject")
-inline fun Logger.warn(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.warn(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isWarnEnabled)
         warn(message().toString(), marker, throwable)
 }
@@ -902,7 +900,7 @@ inline fun Logger.warn(marker: Marker?, throwable: Throwable?, crossinline messa
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(crossinline message: () -> String) {
+inline fun KLogger.error(crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message())
 }
@@ -916,7 +914,7 @@ inline fun Logger.error(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("errorObject")
-inline fun Logger.error(crossinline message: () -> Any?) {
+inline fun KLogger.error(crossinline message: () -> Any?) {
     if (isErrorEnabled)
         error(message().toString())
 }
@@ -934,7 +932,7 @@ inline fun Logger.error(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.error(arg: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), arg)
 }
@@ -953,7 +951,7 @@ inline fun Logger.error(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.error(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), arg1, arg2)
 }
@@ -975,7 +973,7 @@ inline fun Logger.error(arg1: Any?, arg2: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.error(vararg arguments: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), *arguments)
 }
@@ -988,7 +986,7 @@ inline fun Logger.error(vararg arguments: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.error(throwable: Throwable?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), throwable)
 }
@@ -1004,7 +1002,7 @@ inline fun Logger.error(throwable: Throwable?, crossinline message: () -> String
  */
 @JvmSynthetic
 @JvmName("errorObject")
-inline fun Logger.error(throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.error(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isErrorEnabled)
         error(message().toString(), throwable)
 }
@@ -1016,7 +1014,7 @@ inline fun Logger.error(throwable: Throwable?, crossinline message: () -> Any?) 
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(marker: Marker?, crossinline message: () -> String) {
+inline fun KLogger.error(marker: Marker?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message())
 }
@@ -1031,7 +1029,7 @@ inline fun Logger.error(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("errorObject")
-inline fun Logger.error(marker: Marker?, crossinline message: () -> Any?) {
+inline fun KLogger.error(marker: Marker?, crossinline message: () -> Any?) {
     if (isErrorEnabled)
         error(message().toString(), marker)
 }
@@ -1045,7 +1043,7 @@ inline fun Logger.error(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+inline fun KLogger.error(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), arg)
 }
@@ -1061,7 +1059,7 @@ inline fun Logger.error(marker: Marker?, arg: Any?, crossinline message: () -> S
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+inline fun KLogger.error(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), arg1, arg2)
 }
@@ -1076,7 +1074,7 @@ inline fun Logger.error(marker: Marker?, arg1: Any?, arg2: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+inline fun KLogger.error(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), arguments)
 }
@@ -1091,7 +1089,7 @@ inline fun Logger.error(marker: Marker?, vararg arguments: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun Logger.error(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+inline fun KLogger.error(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), throwable)
 }
@@ -1109,7 +1107,7 @@ inline fun Logger.error(marker: Marker?, throwable: Throwable?, crossinline mess
  */
 @JvmSynthetic
 @JvmName("errorObject")
-inline fun Logger.error(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+inline fun KLogger.error(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isErrorEnabled)
         error(message().toString(), marker, throwable)
 }
