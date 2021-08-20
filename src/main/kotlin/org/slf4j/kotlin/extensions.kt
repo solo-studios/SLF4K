@@ -1,9 +1,9 @@
 /*
- * PolyhedralBot - A Discord bot for the Polyhedral Development discord server
+ * SLF4K - A Discord bot for the Polyhedral Development discord server
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file extensions.kt is part of PolyhedralBot
- * Last modified on 02-07-2021 01:33 a.m.
+ * The file extensions.kt is part of SLF4K
+ * Last modified on 17-08-2021 09:50 p.m.
  *
  * MIT License
  *
@@ -17,7 +17,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
- * POLYHEDRALBOT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * SLF4K IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER

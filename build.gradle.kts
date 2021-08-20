@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "ca.solo-studios"
-version = "0.1.0"
+version = "0.1.1"
 
 repositories {
     mavenCentral()
@@ -30,7 +30,9 @@ tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-val dokkaHtml by tasks.getting(DokkaTask::class)
+val dokkaHtml by tasks.getting(DokkaTask::class) {
+    
+}
 
 val javadoc by tasks.getting(Javadoc::class)
 
