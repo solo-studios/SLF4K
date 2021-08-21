@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file marker.kt is part of SLF4K
- * Last modified on 20-08-2021 08:08 p.m.
+ * Last modified on 20-08-2021 08:09 p.m.
  *
  * MIT License
  *
@@ -30,7 +30,6 @@
 package org.slf4j.kotlin
 
 import org.slf4j.MarkerFactory
-import kotlin.reflect.KProperty
 
 /**
  * Lazily constructs a new marker using the provided name.
@@ -71,9 +70,3 @@ inline fun getMarker(name: String): KMarker = KMarker(MarkerFactory.getMarker(na
  */
 @JvmSynthetic
 inline fun getDetachedMarker(name: String): KMarker = KMarker(MarkerFactory.getDetachedMarker(name))
-
-class MarkerDelegate(private val marker: KMarker) {
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): KMarker {
-        return marker
-    }
-}

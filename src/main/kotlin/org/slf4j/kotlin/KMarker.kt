@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KMarker.kt is part of SLF4K
- * Last modified on 20-08-2021 08:08 p.m.
+ * Last modified on 20-08-2021 08:09 p.m.
  *
  * MIT License
  *
@@ -29,6 +29,7 @@
 package org.slf4j.kotlin
 
 import org.slf4j.Marker
+import kotlin.reflect.KProperty
 
 
 /**
@@ -38,4 +39,8 @@ import org.slf4j.Marker
  *
  * @param delegate [Marker] instance to wrap.
  */
-open class KMarker(delegate: Marker) : Marker by delegate
+open class KMarker(delegate: Marker) : Marker by delegate {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): KMarker {
+        return this
+    }
+}
