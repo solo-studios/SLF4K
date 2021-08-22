@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file mdc.kt is part of SLF4K
- * Last modified on 22-08-2021 05:41 p.m.
+ * Last modified on 22-08-2021 05:43 p.m.
  *
  * MIT License
  *
@@ -126,6 +126,9 @@ object mdc : MutableMap<String, String>,
  * @constructor Create a new context, with reference to the provided map as MDC or, by default, the current MDC.
  */
 class MDCCoroutineContext(private var contextMap: Map<String, String> = mdc.asMap()) : ThreadContextElement<Map<String, String>?> {
+    /**
+     * Key for MDC Coroutine Context.
+     */
     companion object Key : CoroutineContext.Key<MDCCoroutineContext>
     
     override val key: CoroutineContext.Key<*>
