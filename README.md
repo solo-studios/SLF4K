@@ -1,7 +1,7 @@
 # SLF4K
 
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/ca.solo-studios/slf4k?style=for-the-badge)](https://search.maven.org/search?q=g:ca.solo-studios%20a:slf4k)
+[![Maven Central](https://img.shields.io/maven-central/v/ca.solo-studios/slf4k.svg?style=for-the-badge&label=Maven%20Central)](https://search.maven.org/search?q=g:ca.solo-studios%20a:slf4k)
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg?style=for-the-badge)](https://kotlinlang.org/)
 [![Discord Server](https://img.shields.io/discord/871114669761372221?color=7389D8&label=Discord&logo=discord&logoColor=8fa3ff&style=for-the-badge)](https://discord.solo-studios.ca)
 
@@ -11,6 +11,34 @@
 
 - Use kotlin features to cleanly get the appropriate logger for your class
 - Clean up kotlin class names to make logging easy to understand
+- Easy and simple MDC usage
+- MDC support for Coroutines
+
+## Including
+
+You can include SLF4K in your project by adding the following:
+
+#### Maven
+
+```xml
+<dependency>
+  <groupId>ca.solo-studios</groupId>
+  <artifactId>slf4k</artifactId>
+  <version>0.1.1</version>
+</dependency>
+```
+
+#### Gradle Groovy DSL
+
+```groovy
+implementation 'ca.solo-studios:slf4k:0.1.1'
+```
+
+#### Gradle Kotlin DSL
+
+```kotlin
+implementation("ca.solo-studios:slf4k:0.1.1")
+```
 
 ## Examples
 
