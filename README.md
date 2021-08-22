@@ -1,5 +1,6 @@
 # SLF4K
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f1e82252f2aa4ef0bbfc598cacce9f5c)](https://app.codacy.com/gh/solo-studios/SLF4K?utm_source=github.com&utm_medium=referral&utm_content=solo-studios/SLF4K&utm_campaign=Badge_Grade_Settings)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/ca.solo-studios/slf4k.svg?style=for-the-badge&label=Maven%20Central)](https://search.maven.org/search?q=g:ca.solo-studios%20a:slf4k)
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg?style=for-the-badge)](https://kotlinlang.org/)
