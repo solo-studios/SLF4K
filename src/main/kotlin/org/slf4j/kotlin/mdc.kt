@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file mdc.kt is part of SLF4K
- * Last modified on 22-08-2021 05:40 p.m.
+ * Last modified on 22-08-2021 05:41 p.m.
  *
  * MIT License
  *
@@ -88,7 +88,7 @@ object mdc : MutableMap<String, String>,
      * @param key The key to retrieve
      * @return The string value identified by the key parameter.
      */
-    override operator fun get(key: String): String = MDC.get(key)
+    override operator fun get(key: String): String? = MDC.get(key)
     
     operator fun set(key: String, value: String?) {
         if (value != null)
