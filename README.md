@@ -18,7 +18,7 @@
 
 You can include SLF4K in your project by adding the following:
 
-#### Maven
+### Maven
 
 ```xml
 <dependency>
@@ -28,13 +28,13 @@ You can include SLF4K in your project by adding the following:
 </dependency>
 ```
 
-#### Gradle Groovy DSL
+### Gradle Groovy DSL
 
 ```groovy
 implementation 'ca.solo-studios:slf4k:0.2.0'
 ```
 
-#### Gradle Kotlin DSL
+### Gradle Kotlin DSL
 
 ```kotlin
 implementation("ca.solo-studios:slf4k:0.2.0")
