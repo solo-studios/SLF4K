@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 22-08-2021 07:11 p.m.
+ * Last modified on 22-08-2021 07:43 p.m.
  *
  * MIT License
  *
@@ -28,6 +28,7 @@
 
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jmailen.gradle.kotlinter.tasks.InstallPreCommitHookTask
 
 plugins {
     java
@@ -70,8 +71,13 @@ dependencies {
     testImplementation("org.slf4j:slf4j-simple:1.7.32")
 }
 
+val installKotlinterPreCommitHook by tasks.registering(InstallPreCommitHookTask::class) {
+    group = "build setup"
+    description = "Installs Kotlinter Git pre-commit hook"
+}
+
 tasks.check {
-    dependsOn("installKotlinterPrePushHook")
+    dependsOn(installKotlinterPreCommitHook)
 }
 
 tasks.test {
