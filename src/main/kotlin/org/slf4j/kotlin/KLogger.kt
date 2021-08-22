@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KLogger.kt is part of SLF4K
- * Last modified on 20-08-2021 08:09 p.m.
+ * Last modified on 22-08-2021 05:49 p.m.
  *
  * MIT License
  *
@@ -38,6 +38,14 @@ import kotlin.reflect.KProperty
  * @param delegate [Logger] instance to wrap.
  */
 open class KLogger(delegate: Logger) : Logger by delegate {
+    /**
+     * Operator to allow for property delegation of loggers.
+     *
+     * This is so you can do
+     * ```kotlin
+     * val logger by getLogger()
+     * ```
+     */
     operator fun getValue(thisRef: Any?, property: KProperty<*>): KLogger {
         return this
     }

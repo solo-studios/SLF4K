@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KMarker.kt is part of SLF4K
- * Last modified on 20-08-2021 08:09 p.m.
+ * Last modified on 22-08-2021 05:49 p.m.
  *
  * MIT License
  *
@@ -40,6 +40,14 @@ import kotlin.reflect.KProperty
  * @param delegate [Marker] instance to wrap.
  */
 open class KMarker(delegate: Marker) : Marker by delegate {
+    /**
+     * Operator to allow for property delegation of loggers.
+     *
+     * This is so you can do
+     * ```kotlin
+     * val myMarker by getMarker("MY_MARKER")
+     * ```
+     */
     operator fun getValue(thisRef: Any?, property: KProperty<*>): KMarker {
         return this
     }
