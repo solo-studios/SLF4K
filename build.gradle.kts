@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 21-08-2021 06:36 p.m.
+ * Last modified on 22-08-2021 06:08 p.m.
  *
  * MIT License
  *
@@ -39,7 +39,7 @@ plugins {
 }
 
 group = "ca.solo-studios"
-version = "0.2.0"
+version = "0.3.0"
 
 repositories {
     mavenCentral()
