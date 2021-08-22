@@ -1,9 +1,9 @@
 /*
  * SLF4K - A Discord bot for the Polyhedral Development discord server
- * Copyright (c) 2021 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 20-08-2021 08:09 p.m.
+ * Last modified on 21-08-2021 06:36 p.m.
  *
  * MIT License
  *
@@ -47,7 +47,12 @@ repositories {
 
 dependencies {
     api("org.slf4j:slf4j-api:1.7.32")
+    
+    compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+    
     testImplementation(kotlin("test"))
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+    testImplementation("org.slf4j:slf4j-simple:1.7.32")
 }
 
 tasks.test {
