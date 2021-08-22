@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file mdc.kt is part of SLF4K
- * Last modified on 21-08-2021 07:42 p.m.
+ * Last modified on 22-08-2021 05:40 p.m.
  *
  * MIT License
  *
@@ -32,23 +32,62 @@ import kotlinx.coroutines.ThreadContextElement
 import org.slf4j.MDC
 import kotlin.coroutines.CoroutineContext
 
-fun mdcContext() = CoroutineMDCContext()
+/**
+ * Constructs a new [MDCCoroutineContext], inheriting the current [mdc].
+ *
+ * @return A new [CoroutineContext]
+ */
+fun mdcContext(): MDCCoroutineContext = MDCCoroutineContext()
 
-fun mdcContext(pair: Pair<String, String>) = mdcContext(mapOf(pair))
+/**
+ * Constructs a new [MDCCoroutineContext] using the provided key-value pair as the MDC.
+ *
+ * @param pair The key-value pair used as the MDC.
+ * @return A new [CoroutineContext]
+ */
+fun mdcContext(pair: Pair<String, String>): MDCCoroutineContext = mdcContext(mapOf(pair))
 
-fun mdcContext(vararg pairs: Pair<String, String>) = mdcContext(mapOf(*pairs))
+/**
+ * Constructs a new [MDCCoroutineContext] using the provided key-value pairs as the MDC.
+ *
+ * @param pairs The key-value pairs to be used as the MDC.
+ * @return A new [CoroutineContext]
+ */
+fun mdcContext(vararg pairs: Pair<String, String>): MDCCoroutineContext = mdcContext(mapOf(*pairs))
 
-fun mdcContext(mdcMap: Map<String, String>) = CoroutineMDCContext(mdcMap)
+/**
+ * Constructs a new [MDCCoroutineContext] using the provided map as the MDC.
+ *
+ * @param mdcMap The map to be used as the MDC.
+ * @return A new [CoroutineContext]
+ */
+fun mdcContext(mdcMap: Map<String, String>): MDCCoroutineContext = MDCCoroutineContext(mdcMap)
 
+/**
+ * A wrapper object for SLF4J's [MDC] class.
+ *
+ * This object is just to make it a bit easier to interact with the MDC map.
+ */
 @Suppress("ClassName")
 object mdc : MutableMap<String, String>,
              AbstractMutableMap<String, String>() {
     
-    internal fun getMap(): MutableMap<String, String> = MDC.getCopyOfContextMap() ?: mutableMapOf()
+    internal fun asMap(): MutableMap<String, String> = MDC.getCopyOfContextMap() ?: mutableMapOf()
     
-    val context: CoroutineMDCContext
-        get() = CoroutineMDCContext()
+    /**
+     * Get the current MDC as a [CoroutineContext]
+     *
+     * @see [MDCCoroutineContext]
+     */
+    val context: MDCCoroutineContext
+        get() = MDCCoroutineContext()
     
+    /**
+     * Retrieves a value from the current MDC.
+     *
+     * @param key The key to retrieve
+     * @return The string value identified by the key parameter.
+     */
     override operator fun get(key: String): String = MDC.get(key)
     
     operator fun set(key: String, value: String?) {
@@ -61,7 +100,7 @@ object mdc : MutableMap<String, String>,
     override fun containsKey(key: String): Boolean = MDC.get(key) != null
     
     override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
-        get() = getMap().entries
+        get() = asMap().entries
     
     override fun clear() {
         MDC.clear()
@@ -80,21 +119,26 @@ object mdc : MutableMap<String, String>,
     }
 }
 
-
-class CoroutineMDCContext(private var contextMap: Map<String, String> = mdc.getMap()) : ThreadContextElement<Map<String, String>?> {
-    companion object Key : CoroutineContext.Key<CoroutineMDCContext>
+/**
+ * A [CoroutineContext] which holds a reference to the MDC.
+ *
+ * @property contextMap The MDC to be passed to the associated coroutine
+ * @constructor Create a new context, with reference to the provided map as MDC or, by default, the current MDC.
+ */
+class MDCCoroutineContext(private var contextMap: Map<String, String> = mdc.asMap()) : ThreadContextElement<Map<String, String>?> {
+    companion object Key : CoroutineContext.Key<MDCCoroutineContext>
     
     override val key: CoroutineContext.Key<*>
         get() = Key
     
     override fun updateThreadContext(context: CoroutineContext): Map<String, String> {
-        val oldState: Map<String, String> = mdc.getMap()
+        val oldState: Map<String, String> = mdc.asMap()
         MDC.setContextMap(contextMap)
         return oldState
     }
     
     override fun restoreThreadContext(context: CoroutineContext, oldState: Map<String, String>?) {
-        contextMap = mdc.getMap()
+        contextMap = mdc.asMap()
         if (oldState == null)
             MDC.clear()
         else
