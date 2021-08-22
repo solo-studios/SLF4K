@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file mdc.kt is part of SLF4K
- * Last modified on 22-08-2021 05:43 p.m.
+ * Last modified on 22-08-2021 07:17 p.m.
  *
  * MIT License
  *
@@ -25,12 +25,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package org.slf4j.kotlin
 
-import kotlinx.coroutines.ThreadContextElement
 import org.slf4j.MDC
+
 import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.ThreadContextElement
 
 /**
  * Constructs a new [MDCCoroutineContext], inheriting the current [mdc].

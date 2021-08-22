@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file StaticMDCBinder.kt is part of SLF4K
- * Last modified on 21-08-2021 09:20 p.m.
+ * Last modified on 22-08-2021 07:20 p.m.
  *
  * MIT License
  *

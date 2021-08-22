@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file MDCCoroutineTest.kt is part of SLF4K
- * Last modified on 21-08-2021 07:35 p.m.
+ * Last modified on 22-08-2021 07:23 p.m.
  *
  * MIT License
  *
@@ -28,14 +28,15 @@
 
 package ca.solostudios.slf4k
 
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.slf4j.kotlin.mdc
 import org.slf4j.kotlin.mdcContext
+
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MDCCoroutineTest {
     @BeforeEach

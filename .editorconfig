@@ -5,7 +5,7 @@ charset = utf-8
 end_of_line = lf
 indent_size = 4
 indent_style = space
-insert_final_newline = false
+insert_final_newline = true
 max_line_length = 140
 tab_width = 4
 ij_continuation_indent_size = 8
@@ -129,7 +129,7 @@ ij_java_for_statement_wrap = on_every_item
 ij_java_generate_final_locals = false
 ij_java_generate_final_parameters = false
 ij_java_if_brace_force = never
-ij_java_imports_layout = *, |, javax.**, java.**, |, $*
+ij_java_imports_layout = *,|,javax.**,java.**,|,$*
 ij_java_indent_case_from_switch = true
 ij_java_insert_inner_class_imports = false
 ij_java_insert_override_annotation = true
@@ -164,7 +164,7 @@ ij_java_method_parameters_wrap = normal
 ij_java_modifier_list_wrap = false
 ij_java_names_count_to_use_import_on_demand = 3
 ij_java_new_line_after_lparen_in_record_header = false
-ij_java_packages_to_use_import_on_demand = java.awt.*, javax.swing.*
+ij_java_packages_to_use_import_on_demand = java.awt.*,javax.swing.*
 ij_java_parameter_annotation_wrap = on_every_item
 ij_java_parentheses_expression_new_line_after_left_paren = false
 ij_java_parentheses_expression_right_paren_on_new_line = false
@@ -285,12 +285,12 @@ ij_java_wrap_long_lines = true
 ij_visual_guides = none
 ij_editorconfig_align_group_field_declarations = false
 ij_editorconfig_space_after_colon = false
-ij_editorconfig_space_after_comma = true
+ij_editorconfig_space_after_comma = false
 ij_editorconfig_space_before_colon = false
 ij_editorconfig_space_before_comma = false
 ij_editorconfig_spaces_around_assignment_operators = true
 
-[{*.bash, *.sh, *.zsh}]
+[{*.bash,*.sh,*.zsh}]
 ij_visual_guides = none
 ij_shell_binary_ops_start_line = true
 ij_shell_keep_column_alignment_padding = false
@@ -299,7 +299,7 @@ ij_shell_redirect_followed_by_space = false
 ij_shell_switch_cases_indented = true
 ij_shell_use_unix_line_separator = true
 
-[{*.gant, *.gradle, *.groovy, *.gson, *.gy}]
+[{*.gant,*.gradle,*.groovy,*.gson,*.gy}]
 ij_visual_guides = none
 ij_groovy_align_group_field_declarations = false
 ij_groovy_align_multiline_array_initializer_expression = false
@@ -356,7 +356,7 @@ ij_groovy_for_statement_right_paren_on_new_line = false
 ij_groovy_for_statement_wrap = off
 ij_groovy_if_brace_force = never
 ij_groovy_import_annotation_wrap = 2
-ij_groovy_imports_layout = *, |, javax.**, java.**, |, $*
+ij_groovy_imports_layout = *,|,javax.**,java.**,|,$*
 ij_groovy_indent_case_from_switch = true
 ij_groovy_indent_label_blocks = true
 ij_groovy_insert_inner_class_imports = false
@@ -479,10 +479,14 @@ ij_groovy_while_brace_force = never
 ij_groovy_while_on_new_line = false
 ij_groovy_wrap_long_lines = false
 
-[{*.gql, *.graphql, *.graphqls}]
+[{*.gql,*.graphql,*.graphqls}]
 ij_visual_guides = none
 
-[{*.gradle.kts, *.kt, *.kts, *.main.kts, *.space.kts}]
+[{*.gradle.kts,*.kt,*.kts,*.main.kts,*.space.kts}]
+# noinspection EditorConfigKeyCorrectness
+disabled_rules = no-multi-spaces,no-consecutive-blank-lines,indent,no-trailing-spaces,experimental:multiline-if-else
+insert_final_newline = true
+
 ij_visual_guides = none
 ij_kotlin_align_in_columns_case_branch = true
 ij_kotlin_align_multiline_binary_operation = false
@@ -517,7 +521,7 @@ ij_kotlin_field_annotation_wrap = split_into_lines
 ij_kotlin_finally_on_new_line = false
 ij_kotlin_if_rparen_on_new_line = false
 ij_kotlin_import_nested_classes = false
-ij_kotlin_imports_layout = *, java.*, javax.*, kotlin.**, ^
+ij_kotlin_imports_layout = *,|,java.**,javax.**,|,kotlin.**,kotlinx.**,^
 ij_kotlin_insert_whitespaces_in_simple_one_line_method = true
 ij_kotlin_keep_blank_lines_before_right_brace = 1
 ij_kotlin_keep_blank_lines_in_code = 2
@@ -564,7 +568,7 @@ ij_kotlin_wrap_elvis_expressions = 1
 ij_kotlin_wrap_expression_body_functions = 1
 ij_kotlin_wrap_first_method_in_call_chain = false
 
-[{*.graphqlconfig, *.har, *.jsb2, *.jsb3, *.json, .babelrc, .eslintrc, .stylelintrc, bowerrc, jest.config, mcmod.info, pack.mcmeta}]
+[{*.graphqlconfig,*.har,*.jsb2,*.jsb3,*.json,.babelrc,.eslintrc,.stylelintrc,bowerrc,jest.config,mcmod.info,pack.mcmeta}]
 ij_visual_guides = none
 ij_json_keep_blank_lines_in_code = 1
 ij_json_keep_indents_on_empty_lines = false
@@ -577,7 +581,7 @@ ij_json_spaces_within_braces = true
 ij_json_spaces_within_brackets = true
 ij_json_wrap_long_lines = false
 
-[{*.markdown, *.md}]
+[{*.markdown,*.md}]
 max_line_length = 120
 ij_visual_guides = 120
 ij_markdown_force_one_space_after_blockquote_symbol = true
@@ -592,18 +596,18 @@ ij_markdown_min_lines_around_block_elements = 1
 ij_markdown_min_lines_around_header = 1
 ij_markdown_min_lines_between_paragraphs = 1
 
-[{*.properties, spring.handlers, spring.schemas}]
+[{*.properties,spring.handlers,spring.schemas}]
 ij_visual_guides = none
 ij_properties_align_group_field_declarations = false
 ij_properties_keep_blank_lines = false
 ij_properties_key_value_delimiter = equals
 ij_properties_spaces_around_key_value_delimiter = false
 
-[{*.toml, Cargo.lock, Cargo.toml.orig, Gopkg.lock, Pipfile, poetry.lock}]
+[{*.toml,Cargo.lock,Cargo.toml.orig,Gopkg.lock,Pipfile,poetry.lock}]
 ij_visual_guides = none
 ij_toml_keep_indents_on_empty_lines = false
 
-[{*.yaml, *.yml}]
+[{*.yaml,*.yml}]
 indent_size = 2
 ij_visual_guides = none
 ij_yaml_align_values_properties = on_value

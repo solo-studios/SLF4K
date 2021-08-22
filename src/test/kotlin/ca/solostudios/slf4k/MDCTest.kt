@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file MDCTest.kt is part of SLF4K
- * Last modified on 21-08-2021 06:30 p.m.
+ * Last modified on 22-08-2021 07:22 p.m.
  *
  * MIT License
  *
@@ -31,6 +31,7 @@ package ca.solostudios.slf4k
 import org.junit.jupiter.api.Test
 import org.slf4j.MDC
 import org.slf4j.kotlin.mdc
+
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull

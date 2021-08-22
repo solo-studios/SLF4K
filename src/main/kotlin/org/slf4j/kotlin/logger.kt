@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file logger.kt is part of SLF4K
- * Last modified on 17-08-2021 09:02 p.m.
+ * Last modified on 22-08-2021 07:17 p.m.
  *
  * MIT License
  *
@@ -29,8 +29,10 @@
 
 package org.slf4j.kotlin
 
-import java.lang.invoke.MethodHandles
 import org.slf4j.LoggerFactory
+
+import java.lang.invoke.MethodHandles
+
 import kotlin.reflect.KClass
 
 /**

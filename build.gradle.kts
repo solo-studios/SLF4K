@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 22-08-2021 06:08 p.m.
+ * Last modified on 22-08-2021 07:11 p.m.
  *
  * MIT License
  *
@@ -36,13 +36,28 @@ plugins {
     `maven-publish`
     kotlin("jvm") version "1.5.10"
     id("org.jetbrains.dokka") version "1.5.0"
+    id("org.jmailen.kotlinter") version "3.5.0"
 }
 
 group = "ca.solo-studios"
-version = "0.3.0"
+version = "0.3.1"
 
 repositories {
     mavenCentral()
+}
+
+kotlinter {
+    ignoreFailures = false
+    indentSize = 4
+    reporters = arrayOf("checkstyle", "html", "json", "plain")
+    experimentalRules = true
+    disabledRules = arrayOf(
+            "no-multi-spaces",
+            "no-consecutive-blank-lines",
+            "indent",
+            "no-trailing-spaces",
+            "experimental:multiline-if-else",
+                           )
 }
 
 dependencies {
@@ -55,6 +70,10 @@ dependencies {
     testImplementation("org.slf4j:slf4j-simple:1.7.32")
 }
 
+tasks.check {
+    dependsOn("installKotlinterPrePushHook")
+}
+
 tasks.test {
     useJUnitPlatform()
 }
@@ -63,9 +82,7 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-val dokkaHtml by tasks.getting(DokkaTask::class) {
-    
-}
+val dokkaHtml by tasks.getting(DokkaTask::class)
 
 val javadoc by tasks.getting(Javadoc::class)
 

@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KMarker.kt is part of SLF4K
- * Last modified on 22-08-2021 05:49 p.m.
+ * Last modified on 22-08-2021 07:17 p.m.
  *
  * MIT License
  *
@@ -25,12 +25,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package org.slf4j.kotlin
 
 import org.slf4j.Marker
-import kotlin.reflect.KProperty
 
+import kotlin.reflect.KProperty
 
 /**
  * Wrapper around a [Marker] that delegates all calls to the internal logger.
