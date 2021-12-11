@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 11-12-2021 06:31 p.m.
+ * Last modified on 11-12-2021 06:34 p.m.
  *
  * MIT License
  *
@@ -35,13 +35,13 @@ plugins {
     signing
     `java-library`
     `maven-publish`
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.5.30"
     id("org.jetbrains.dokka") version "1.5.0"
     id("org.jmailen.kotlinter") version "3.5.0"
 }
 
 group = "ca.solo-studios"
-version = "0.4.1"
+version = "0.4.2"
 
 repositories {
     mavenCentral()
@@ -67,10 +67,14 @@ dependencies {
     
     api("org.slf4j:slf4j-api:1.7.32")
     
-    compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2") {
+        exclude("org.jetbrains.kotlin")
+    }
     
     testImplementation(kotlin("test"))
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2") {
+        exclude("org.jetbrains.kotlin")
+    }
     testImplementation("org.slf4j:slf4j-simple:1.7.32")
 }
 

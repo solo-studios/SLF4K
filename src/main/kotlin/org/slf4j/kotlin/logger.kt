@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file logger.kt is part of SLF4K
- * Last modified on 11-12-2021 06:31 p.m.
+ * Last modified on 11-12-2021 06:34 p.m.
  *
  * MIT License
  *
@@ -91,7 +91,6 @@ inline fun <reified T> T.getLogger(): KLogger {
         T::class
     
     return getLogger(clazz)
-    
 } // using reified generic magic is faster than MethodHandles
 
 /**
