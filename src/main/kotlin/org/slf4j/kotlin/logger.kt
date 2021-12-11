@@ -30,7 +30,9 @@
 package org.slf4j.kotlin
 
 import org.slf4j.LoggerFactory
+
 import java.lang.invoke.MethodHandles
+
 import kotlin.reflect.KClass
 
 /**

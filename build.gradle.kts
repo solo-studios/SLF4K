@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 11-12-2021 06:34 p.m.
+ * Last modified on 11-12-2021 06:40 p.m.
  *
  * MIT License
  *
@@ -41,7 +41,7 @@ plugins {
 }
 
 group = "ca.solo-studios"
-version = "0.4.2"
+version = "0.4.3"
 
 repositories {
     mavenCentral()
@@ -131,7 +131,7 @@ publishing {
             pom {
                 name.set("SLF4K")
                 description.set("A set of SLF4J extensions for Kotlin to make logging more idiomatic.")
-                url.set("https://github.com/solonovamax/SLF4K")
+                url.set("https://github.com/solo-studios/SLF4K")
                 
                 inceptionYear.set("2021")
                 
@@ -151,12 +151,12 @@ publishing {
                 }
                 issueManagement {
                     system.set("GitHub")
-                    url.set("https://github.com/solonovamax/SLF4K/issues")
+                    url.set("https://github.com/solo-studios/SLF4K/issues")
                 }
                 scm {
-                    connection.set("scm:git:https://github.com/solonovamax/SLF4K.git")
-                    developerConnection.set("scm:git:ssh://github.com/solonovamax/SLF4K.git")
-                    url.set("https://github.com/solonovamax/SLF4K/")
+                    connection.set("scm:git:https://github.com/solo-studios/SLF4K.git")
+                    developerConnection.set("scm:git:ssh://github.com/solo-studios/SLF4K.git")
+                    url.set("https://github.com/solo-studios/SLF4K/")
                 }
             }
         }
