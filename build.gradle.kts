@@ -1,9 +1,9 @@
 /*
- * SLF4K - A Discord bot for the Polyhedral Development discord server
+ * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 22-08-2021 07:43 p.m.
+ * Last modified on 11-12-2021 06:10 p.m.
  *
  * MIT License
  *
@@ -41,7 +41,7 @@ plugins {
 }
 
 group = "ca.solo-studios"
-version = "0.3.1"
+version = "0.3.2"
 
 repositories {
     mavenCentral()
@@ -154,6 +154,7 @@ publishing {
             }
         }
     }
+    
     repositories {
         maven {
             name = "sonatypeStaging"

@@ -1,9 +1,9 @@
 /*
- * SLF4K - A Discord bot for the Polyhedral Development discord server
+ * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file logger.kt is part of SLF4K
- * Last modified on 22-08-2021 07:17 p.m.
+ * Last modified on 11-12-2021 06:10 p.m.
  *
  * MIT License
  *
@@ -30,9 +30,7 @@
 package org.slf4j.kotlin
 
 import org.slf4j.LoggerFactory
-
 import java.lang.invoke.MethodHandles
-
 import kotlin.reflect.KClass
 
 /**

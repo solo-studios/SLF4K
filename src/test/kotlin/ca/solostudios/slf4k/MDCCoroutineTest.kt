@@ -1,9 +1,9 @@
 /*
- * SLF4K - A Discord bot for the Polyhedral Development discord server
+ * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file MDCCoroutineTest.kt is part of SLF4K
- * Last modified on 22-08-2021 07:23 p.m.
+ * Last modified on 06-09-2021 02:38 p.m.
  *
  * MIT License
  *
