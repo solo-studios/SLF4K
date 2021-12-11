@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 11-12-2021 06:17 p.m.
+ * Last modified on 11-12-2021 06:31 p.m.
  *
  * MIT License
  *
@@ -41,7 +41,7 @@ plugins {
 }
 
 group = "ca.solo-studios"
-version = "0.4.0"
+version = "0.4.1"
 
 repositories {
     mavenCentral()
@@ -53,15 +53,18 @@ kotlinter {
     reporters = arrayOf("checkstyle", "html", "json", "plain")
     experimentalRules = true
     disabledRules = arrayOf(
-            "no-multi-spaces",
-            "no-consecutive-blank-lines",
-            "indent",
-            "no-trailing-spaces",
-            "experimental:multiline-if-else",
-                           )
+        "no-multi-spaces",
+        "no-consecutive-blank-lines",
+        "indent",
+        "no-trailing-spaces",
+        "experimental:multiline-if-else",
+    )
 }
 
 dependencies {
+    implementation(kotlin("stdlib"))
+    implementation(kotlin("reflect"))
+    
     api("org.slf4j:slf4j-api:1.7.32")
     
     compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")

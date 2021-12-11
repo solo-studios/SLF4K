@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file logger.kt is part of SLF4K
- * Last modified on 11-12-2021 06:21 p.m.
+ * Last modified on 11-12-2021 06:31 p.m.
  *
  * MIT License
  *
@@ -84,7 +84,15 @@ inline fun <reified T> getLazyLogger(): Lazy<KLogger> = lazy {
  *
  * @return A new [KLogger] for the invoking class.
  */
-inline fun <reified T> T.getLogger(): KLogger = getLogger(T::class) // using reified generic magic is faster than MethodHandles
+inline fun <reified T> T.getLogger(): KLogger {
+    val clazz = if (T::class.isCompanion)
+        T::class.java.declaringClass?.kotlin ?: T::class
+    else
+        T::class
+    
+    return getLogger(clazz)
+    
+} // using reified generic magic is faster than MethodHandles
 
 /**
  * Constructs a new logger using the provided class.
