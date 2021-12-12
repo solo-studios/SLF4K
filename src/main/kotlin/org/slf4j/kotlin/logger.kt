@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file logger.kt is part of SLF4K
- * Last modified on 12-12-2021 03:45 p.m.
+ * Last modified on 12-12-2021 04:12 p.m.
  *
  * MIT License
  *
@@ -38,7 +38,7 @@ import kotlin.reflect.KClass
  *
  * @return A new [Lazy] instantiated [KLogger] for the invoking class.
  */
-inline fun Any.getLazyLogger(): Lazy<KLogger> = lazy { this.getLogger() }
+inline fun <reified T> T.getLazyLogger(): Lazy<KLogger> = lazy { getLogger(T::class) }
 
 /**
  * Lazily constructs a new logger using the provided class.
@@ -75,8 +75,18 @@ inline fun getLazyLogger(name: String): Lazy<KLogger> = lazy { getLogger(name) }
  * @return A new [Lazy] instantiated [KLogger] for the calling class.
  */
 @JvmSynthetic
-inline fun <reified T> getLazyLogger(): Lazy<KLogger> = lazy {
-    getLogger(T::class)
+@Deprecated(
+    message = "You should use  the version which is reified instead, to avoid the cost of expensive stack trace analysis. " +
+            "For top level loggers, use method handles directly.",
+    replaceWith = ReplaceWith(
+        "getLogger(MethodHandles.lookup().lookupClass())",
+        "org.slf4j.kotlin.getLogger", // Imports
+        "java.lang.invoke.MethodHandles"
+    ),
+    level = DeprecationLevel.HIDDEN,
+)
+inline fun getLazyLogger(): Lazy<KLogger> = lazy {
+    getLogger(MethodHandles.lookup().lookupClass())
 }
 
 /**
@@ -85,12 +95,7 @@ inline fun <reified T> getLazyLogger(): Lazy<KLogger> = lazy {
  * @return A new [KLogger] for the invoking class.
  */
 inline fun <reified T> T.getLogger(): KLogger {
-    val clazz = if (T::class.isCompanion)
-        T::class.java.declaringClass?.kotlin ?: T::class
-    else
-        T::class
-    
-    return getLogger(clazz)
+    return getLogger(T::class)
 } // using reified generic magic is faster than MethodHandles
 
 /**
@@ -100,7 +105,14 @@ inline fun <reified T> T.getLogger(): KLogger {
  * @return A new [KLogger] for the respective class.
  */
 @JvmSynthetic
-inline fun getLogger(clazz: KClass<*>): KLogger = getLogger(clazz.java)
+inline fun getLogger(clazz: KClass<*>): KLogger {
+    val nonCompanionClass = if (clazz.isCompanion)
+        clazz.java.declaringClass?.kotlin ?: clazz
+    else
+        clazz
+    
+    return getLogger(nonCompanionClass.java)
+}
 
 /**
  * Constructs a new logger using the provided class.
@@ -138,8 +150,13 @@ inline fun getLogger(name: String): KLogger = KLogger(LoggerFactory.getLogger(na
  */
 @JvmSynthetic
 @Deprecated(
-    message = "You should use  the version which is reified instead, to avoid the cost of expensive stack trace analysis.",
-    replaceWith = ReplaceWith("getLogger()", "org.slf4j.kotlin.getLogger"),
+    message = "You should use  the version which is reified instead, to avoid the cost of expensive stack trace analysis. " +
+            "For top level loggers, use method handles directly.",
+    replaceWith = ReplaceWith(
+        "getLogger(MethodHandles.lookup().lookupClass())",
+        "org.slf4j.kotlin.getLogger", // Imports
+        "java.lang.invoke.MethodHandles"
+    ),
     level = DeprecationLevel.HIDDEN,
 )
 inline fun getLogger(): KLogger = getLogger(MethodHandles.lookup().lookupClass())
