@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KLogger.kt is part of SLF4K
- * Last modified on 06-09-2021 02:38 p.m.
+ * Last modified on 12-12-2021 03:45 p.m.
  *
  * MIT License
  *
@@ -28,7 +28,6 @@
 package org.slf4j.kotlin
 
 import org.slf4j.Logger
-
 import kotlin.reflect.KProperty
 
 /**
