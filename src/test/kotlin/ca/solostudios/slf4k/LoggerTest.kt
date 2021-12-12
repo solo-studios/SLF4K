@@ -2,7 +2,7 @@
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file MDCTest.kt is part of SLF4K
+ * The file LoggerTest.kt is part of SLF4K
  * Last modified on 12-12-2021 04:14 p.m.
  *
  * MIT License
@@ -28,40 +28,40 @@
 
 package ca.solostudios.slf4k
 
-import org.junit.jupiter.api.Test
-import org.slf4j.MDC
-import org.slf4j.kotlin.mdc
+import org.slf4j.kotlin.getLogger
+import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
-class MDCTest {
-    
+class LoggerTest {
     @Test
-    fun testMdcPut() {
-        mdc["test"] = "abcd"
+    fun `test automatic logger name`() {
+        val logger by getLogger()
         
-        assertNotNull(MDC.get("test"))
-        assertEquals("abcd", MDC.get("test"))
+        assertEquals(LoggerTest::class.qualifiedName, logger.name)
     }
     
     @Test
-    fun testMdcGet() {
-        MDC.put("test", "abcd")
+    fun `test logger name by kclass`() {
+        val logger by getLogger(LoggerTest::class)
         
-        assertEquals("abcd", mdc["test"])
+        assertEquals(LoggerTest::class.qualifiedName, logger.name)
     }
     
     @Test
-    fun testMdcRemove() {
-        MDC.put("test", "abcd")
-        mdc["test"] = null
+    fun `test logger by class name`() {
+        val logger by getLogger(LoggerTest::class.java)
         
-        assertNull(MDC.get("test"))
+        assertEquals(LoggerTest::class.qualifiedName, logger.name)
+    }
+    
+    @Test
+    fun `test automatic logger name in lambda`() {
+        val lambda = {
+            val logger by getLogger()
+            
+            assertEquals(LoggerTest::class.qualifiedName, logger.name)
+        }
         
-        MDC.put("test", "abcd")
-        mdc.remove("test")
-        
-        assertNull(MDC.get("test"))
+        lambda()
     }
 }

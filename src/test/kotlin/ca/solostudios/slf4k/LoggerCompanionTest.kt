@@ -2,7 +2,7 @@
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file MDCTest.kt is part of SLF4K
+ * The file LoggerCompanionTest.kt is part of SLF4K
  * Last modified on 12-12-2021 04:14 p.m.
  *
  * MIT License
@@ -28,40 +28,25 @@
 
 package ca.solostudios.slf4k
 
-import org.junit.jupiter.api.Test
-import org.slf4j.MDC
-import org.slf4j.kotlin.mdc
+import org.slf4j.kotlin.getLogger
+import kotlin.reflect.full.companionObject
+import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
-class MDCTest {
-    
+class LoggerCompanionTest {
     @Test
-    fun testMdcPut() {
-        mdc["test"] = "abcd"
-        
-        assertNotNull(MDC.get("test"))
-        assertEquals("abcd", MDC.get("test"))
+    fun `test automatic logger name by companion`() {
+        assertEquals(LoggerCompanionTest::class.qualifiedName, logger.name)
     }
     
     @Test
-    fun testMdcGet() {
-        MDC.put("test", "abcd")
+    fun `test logger name by direct companion reference`() {
+        val logger by getLogger(LoggerCompanionTest::class.companionObject!!)
         
-        assertEquals("abcd", mdc["test"])
+        assertEquals(LoggerCompanionTest::class.qualifiedName, logger.name)
     }
     
-    @Test
-    fun testMdcRemove() {
-        MDC.put("test", "abcd")
-        mdc["test"] = null
-        
-        assertNull(MDC.get("test"))
-        
-        MDC.put("test", "abcd")
-        mdc.remove("test")
-        
-        assertNull(MDC.get("test"))
+    companion object {
+        private val logger by getLogger()
     }
 }
