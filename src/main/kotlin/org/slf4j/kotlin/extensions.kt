@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file extensions.kt is part of SLF4K
- * Last modified on 06-09-2021 02:38 p.m.
+ * Last modified on 24-12-2021 03:37 p.m.
  *
  * MIT License
  *
@@ -69,6 +69,11 @@ inline fun KLogger.trace(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""trace { "${"$"}{message()} ${"$"}arg" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.trace(arg: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), arg)
@@ -88,6 +93,11 @@ inline fun KLogger.trace(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""trace { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.trace(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), arg1, arg2)
@@ -109,6 +119,11 @@ inline fun KLogger.trace(arg1: Any?, arg2: Any?, crossinline message: () -> Stri
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""trace { "${"$"}{message()} ${"$"}{arguments}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.trace(vararg arguments: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), *arguments)
@@ -179,6 +194,11 @@ inline fun KLogger.trace(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""trace(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.trace(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), arg)
@@ -195,6 +215,11 @@ inline fun KLogger.trace(marker: Marker?, arg: Any?, crossinline message: () -> 
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""trace(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.trace(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), arg1, arg2)
@@ -210,6 +235,11 @@ inline fun KLogger.trace(marker: Marker?, arg1: Any?, arg2: Any?, crossinline me
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""trace(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.trace(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), arguments)
@@ -284,6 +314,11 @@ inline fun KLogger.debug(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""debug { "${"$"}{message()} ${"$"}{arg}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.debug(arg: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), arg)
@@ -303,6 +338,11 @@ inline fun KLogger.debug(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""debug { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.debug(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), arg1, arg2)
@@ -325,6 +365,11 @@ inline fun KLogger.debug(arg1: Any?, arg2: Any?, crossinline message: () -> Stri
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""debug { "${"$"}{message()} ${"$"}{arguments}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.debug(vararg arguments: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), *arguments)
@@ -395,6 +440,11 @@ inline fun KLogger.debug(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""debug(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.debug(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), arg)
@@ -411,6 +461,11 @@ inline fun KLogger.debug(marker: Marker?, arg: Any?, crossinline message: () -> 
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""debug(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.debug(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), arg1, arg2)
@@ -426,6 +481,11 @@ inline fun KLogger.debug(marker: Marker?, arg1: Any?, arg2: Any?, crossinline me
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""debug(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.debug(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), arguments)
@@ -500,6 +560,11 @@ inline fun KLogger.info(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""info { "${"$"}{message()} ${"$"}{arg}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.info(arg: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), arg)
@@ -519,6 +584,11 @@ inline fun KLogger.info(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""info { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.info(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), arg1, arg2)
@@ -541,6 +611,11 @@ inline fun KLogger.info(arg1: Any?, arg2: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""info { "${"$"}{message()} ${"$"}{arguments}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.info(vararg arguments: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), *arguments)
@@ -611,6 +686,11 @@ inline fun KLogger.info(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""info(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.info(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), arg)
@@ -627,6 +707,11 @@ inline fun KLogger.info(marker: Marker?, arg: Any?, crossinline message: () -> S
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""info(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.info(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), arg1, arg2)
@@ -642,6 +727,11 @@ inline fun KLogger.info(marker: Marker?, arg1: Any?, arg2: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""info(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.info(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), arguments)
@@ -716,6 +806,11 @@ inline fun KLogger.warn(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""warn { "${"$"}{message()} ${"$"}{arg}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.warn(arg: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), arg)
@@ -735,6 +830,11 @@ inline fun KLogger.warn(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""warn { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.warn(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), arg1, arg2)
@@ -757,6 +857,11 @@ inline fun KLogger.warn(arg1: Any?, arg2: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""warn { "${"$"}{message()} ${"$"}{arguments}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.warn(vararg arguments: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), *arguments)
@@ -827,6 +932,11 @@ inline fun KLogger.warn(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""warn(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.warn(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), arg)
@@ -843,6 +953,11 @@ inline fun KLogger.warn(marker: Marker?, arg: Any?, crossinline message: () -> S
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""warn(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.warn(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), arg1, arg2)
@@ -858,6 +973,11 @@ inline fun KLogger.warn(marker: Marker?, arg1: Any?, arg2: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""warn(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.warn(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), arguments)
@@ -932,6 +1052,11 @@ inline fun KLogger.error(crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""error { "${"$"}{message()} ${"$"}{arg}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.error(arg: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), arg)
@@ -951,6 +1076,11 @@ inline fun KLogger.error(arg: Any?, crossinline message: () -> String) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""error { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.error(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), arg1, arg2)
@@ -973,6 +1103,11 @@ inline fun KLogger.error(arg1: Any?, arg2: Any?, crossinline message: () -> Stri
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""error { "${"$"}{message()} ${"$"}{arguments}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.error(vararg arguments: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), *arguments)
@@ -1043,6 +1178,11 @@ inline fun KLogger.error(marker: Marker?, crossinline message: () -> Any?) {
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""error(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.error(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), arg)
@@ -1059,6 +1199,11 @@ inline fun KLogger.error(marker: Marker?, arg: Any?, crossinline message: () -> 
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""error(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.error(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), arg1, arg2)
@@ -1074,6 +1219,11 @@ inline fun KLogger.error(marker: Marker?, arg1: Any?, arg2: Any?, crossinline me
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
+@Deprecated(
+    message = "Use kotlin string templates instead.",
+    replaceWith = ReplaceWith("""error(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
+    level = DeprecationLevel.ERROR,
+)
 inline fun KLogger.error(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), arguments)
