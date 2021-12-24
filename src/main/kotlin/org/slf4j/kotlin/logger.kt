@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file logger.kt is part of SLF4K
- * Last modified on 12-12-2021 04:12 p.m.
+ * Last modified on 24-12-2021 03:55 p.m.
  *
  * MIT License
  *
@@ -76,12 +76,11 @@ inline fun getLazyLogger(name: String): Lazy<KLogger> = lazy { getLogger(name) }
  */
 @JvmSynthetic
 @Deprecated(
-    message = "You should use  the version which is reified instead, to avoid the cost of expensive stack trace analysis. " +
-            "For top level loggers, use method handles directly.",
+    message = "You should use the version which is reified instead, to avoid the cost of expensive stack trace analysis. " +
+            "For top level loggers, use the alternative located in toplevel package.",
     replaceWith = ReplaceWith(
-        "getLogger(MethodHandles.lookup().lookupClass())",
-        "org.slf4j.kotlin.getLogger", // Imports
-        "java.lang.invoke.MethodHandles"
+        "getLazyLogger()",
+        "org.slf4j.kotlin.toplevel.getLazyLogger", // Imports
     ),
     level = DeprecationLevel.HIDDEN,
 )
@@ -150,12 +149,11 @@ inline fun getLogger(name: String): KLogger = KLogger(LoggerFactory.getLogger(na
  */
 @JvmSynthetic
 @Deprecated(
-    message = "You should use  the version which is reified instead, to avoid the cost of expensive stack trace analysis. " +
-            "For top level loggers, use method handles directly.",
+    message = "You should use the version which is reified instead, to avoid the cost of expensive stack trace analysis. " +
+            "For top level loggers, use the alternative located in toplevel package.",
     replaceWith = ReplaceWith(
-        "getLogger(MethodHandles.lookup().lookupClass())",
-        "org.slf4j.kotlin.getLogger", // Imports
-        "java.lang.invoke.MethodHandles"
+        "getLogger()",
+        "org.slf4j.kotlin.toplevel.getLogger", // Imports
     ),
     level = DeprecationLevel.HIDDEN,
 )
