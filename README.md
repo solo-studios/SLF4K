@@ -24,20 +24,20 @@ You can include SLF4K in your project by adding the following:
 <dependency>
   <groupId>ca.solo-studios</groupId>
   <artifactId>slf4k</artifactId>
-  <version>0.3.0</version>
+  <version>0.4.6</version>
 </dependency>
 ```
 
 ### Gradle Groovy DSL
 
 ```groovy
-implementation 'ca.solo-studios:slf4k:0.3.0'
+implementation 'ca.solo-studios:slf4k:0.4.6'
 ```
 
 ### Gradle Kotlin DSL
 
 ```kotlin
-implementation("ca.solo-studios:slf4k:0.3.0")
+implementation("ca.solo-studios:slf4k:0.4.6")
 ```
 
 ## Examples
