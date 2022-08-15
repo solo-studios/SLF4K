@@ -1,9 +1,9 @@
 /*
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
- * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 24-12-2021 03:56 p.m.
+ * Last modified on 15-08-2022 12:48 p.m.
  *
  * MIT License
  *
@@ -35,9 +35,9 @@ plugins {
     signing
     `java-library`
     `maven-publish`
-    kotlin("jvm") version "1.5.30"
-    id("org.jetbrains.dokka") version "1.5.0"
-    id("org.jmailen.kotlinter") version "3.5.0"
+    kotlin("jvm") version "1.7.10"
+    id("org.jetbrains.dokka") version "1.7.10"
+    id("org.jmailen.kotlinter") version "3.11.1"
 }
 
 group = "ca.solo-studios"
@@ -49,7 +49,7 @@ repositories {
 
 kotlinter {
     ignoreFailures = false
-    indentSize = 4
+    // indentSize = 4
     reporters = arrayOf("checkstyle", "html", "json", "plain")
     experimentalRules = true
     disabledRules = arrayOf(
@@ -57,7 +57,7 @@ kotlinter {
         "no-consecutive-blank-lines",
         "indent",
         "no-trailing-spaces",
-        "experimental:multiline-if-else",
+        "multiline-if-else",
     )
 }
 
@@ -65,17 +65,13 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     
-    api("org.slf4j:slf4j-api:1.7.32")
+    api("org.slf4j:slf4j-api:1.7.36")
     
-    compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2") {
-        exclude("org.jetbrains.kotlin")
-    }
+    compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     
     testImplementation(kotlin("test"))
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2") {
-        exclude("org.jetbrains.kotlin")
-    }
-    testImplementation("org.slf4j:slf4j-simple:1.7.32")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    testImplementation("org.slf4j:slf4j-simple:1.7.36")
 }
 
 val installKotlinterPreCommitHook by tasks.registering(InstallPreCommitHookTask::class) {
