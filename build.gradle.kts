@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 19-11-2022 01:51 p.m.
+ * Last modified on 19-11-2022 02:16 p.m.
  *
  * MIT License
  *
@@ -36,8 +36,9 @@ plugins {
     `java-library`
     `maven-publish`
     kotlin("jvm") version "1.7.10"
-    id("org.jetbrains.dokka") version "1.7.10"
+    id("org.jetbrains.dokka") version "1.7.20"
     id("org.jmailen.kotlinter") version "3.11.1"
+    id("com.google.devtools.ksp") version "1.7.20-1.0.7"
 }
 
 group = "ca.solo-studios"
@@ -65,14 +66,18 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     
-    api("org.slf4j:slf4j-api:1.7.36")
+    api("org.slf4j:slf4j-api:2.0.3")
     
     compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     // compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.6.4")
     
+    kspTest("ca.solo-studios:ksp-service-annotation:1.0.1")
+    kspTest("com.squareup:kotlinpoet:1.12.0") // idk why this isn't being included
+    testCompileOnly("ca.solo-studios:ksp-service-annotation:1.0.1")
+    
     testImplementation(kotlin("test"))
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    testImplementation("org.slf4j:slf4j-simple:1.7.36")
+    testImplementation("org.slf4j:slf4j-simple:2.0.3")
 }
 
 val installKotlinterPreCommitHook by tasks.registering(InstallPreCommitHookTask::class) {
@@ -112,6 +117,7 @@ val sourcesJar by tasks.creating(Jar::class) {
 artifacts {
     archives(sourcesJar)
     archives(javadocJar)
+    archives(jar)
 }
 
 publishing {

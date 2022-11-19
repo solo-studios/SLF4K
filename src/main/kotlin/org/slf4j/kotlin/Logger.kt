@@ -1,9 +1,9 @@
 /*
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
- * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file logger.kt is part of SLF4K
- * Last modified on 24-12-2021 03:55 p.m.
+ * The file Logger.kt is part of SLF4K
+ * Last modified on 19-11-2022 02:16 p.m.
  *
  * MIT License
  *
