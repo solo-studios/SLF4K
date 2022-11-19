@@ -12,8 +12,6 @@
 
 - Use kotlin features to cleanly get the appropriate logger for your class
 - Clean up kotlin class names to make logging easy to understand
-- Easy and simple MDC usage
-- MDC support for Coroutines
 
 ## Including
 
@@ -94,99 +92,31 @@ after which, they can be used normally.
 
 ### Using MDC
 
-MDC can also be used easily in SLF4K.
-
-The MDC map can easily be manipulated as such:
-
-```kotlin
-mdc["myKey"] = "myValue"
-
-val myValue = mdc["myKey"]
-
-mdc["myKey"] = null // setting it to null can be used to remove it
-```
+MDC is used the same as with SLF4J.
 
 ### MDC with Coroutines
 
-Though, one of the problems with MDC is that if you are using it
-with [kotlinx coroutines](https://github.com/Kotlin/kotlinx.coroutines)*, then the MDC values will not carry between
-threads.
+To pass MDC context between [kotlinx coroutines](https://github.com/Kotlin/kotlinx.coroutines),
+use `kotlinx-coroutines-slf4j`:
 
-```kotlin
-mdc["myKey"] = "myValue"
+#### Maven
 
-runBlocking {
-    val myValue = mdc["myKey"]
-    // myValue == null
-    // MDC is *not* propagated between each thread.
-}
+```xml
+<dependency>
+  <groupId>org.jetbrains.kotlinx</groupId>
+  <artifactId>kotlinx-coroutines-slf4j</artifactId>
+  <version>$kotlinxCoroutinesVersion</version>
+</dependency>
 ```
 
-So, to solve this, you can use the current MDC as a coroutine context:
+#### Gradle Groovy DSL
 
-```kotlin
-mdc["myKey"] = "myValue"
-
-runBlocking(mdc.context) {
-    val myValue = mdc["myKey"]
-    // myValue == "myValue"
-    // MDC is now propagated through the coroutine context
-}
+```groovy
+implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoroutinesVersion'
 ```
 
-The MDC is also copied into nested coroutines:
+### Gradle Kotlin DSL
 
 ```kotlin
-mdc["myKey"] = "myValue"
-
-runBlocking(mdc.context) {
-    mdc["myOtherKey"] = "myOtherValue"
-    launch {
-        val myValue = mdc["myKey"]
-        val myOtherValue = mdc["myOtherKey"]
-        // myValue == "myValue"
-        // myOtherValue == "myOtherValue"
-        // MDC caries into children coroutines
-    }
-}
+implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoroutinesVersion")
 ```
-
-You can also create a new coroutine with a new MDC:
-
-```kotlin
-runBlocking(mdcContext("myKey" to "myValue") {
-    val myValue = mdc["myKey"]
-    // myValue == "myValue"
-}
-```
-
-But be warned:\
-Any changes to the MDC in a child coroutine will *not* affect the parent coroutine:
-
-```kotlin
-mdc["myKey"] = "myValue"
-runBlocking(mdc.context) {
-    mdc["myOtherKey"] = "myOtherValue"
-    
-    launch {
-        mdc.clear()
-        
-        val myOtherValue = mdc["myOtherKey"]
-        val myValue = mdc["myKey"]
-        // myOtherValue == null
-        // myValue == null
-    }
-    
-    val myOtherValue = mdc["myOtherKey"]
-    val myValue = mdc["myKey"]
-    // myOtherValue == "myOtherValue"
-    // myValue == "myValue"
-}
-
-val myOtherValue = mdc["myOtherKey"]
-val myValue = mdc["myKey"]
-// myOtherValue == null
-// myValue == "myValue"
-```
-
-*You must include kotlinx.coroutines in your build in addition to SLF4K for this to work.

@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 15-08-2022 12:48 p.m.
+ * Last modified on 19-11-2022 01:51 p.m.
  *
  * MIT License
  *
@@ -68,6 +68,7 @@ dependencies {
     api("org.slf4j:slf4j-api:1.7.36")
     
     compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    // compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.6.4")
     
     testImplementation(kotlin("test"))
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
@@ -108,10 +109,10 @@ val sourcesJar by tasks.creating(Jar::class) {
     from(sourceSets["main"].allSource)
 }
 
-// artifacts {
-//     archives(sourcesJar)
-//     archives(javadocJar)
-// }
+artifacts {
+    archives(sourcesJar)
+    archives(javadocJar)
+}
 
 publishing {
     publications {
