@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file Logger.kt is part of SLF4K
- * Last modified on 19-11-2022 02:16 p.m.
+ * Last modified on 20-11-2022 01:14 p.m.
  *
  * MIT License
  *
@@ -25,92 +25,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("NOTHING_TO_INLINE", "unused")
 
 package org.slf4j.kotlin
 
-import org.slf4j.LoggerFactory
-import java.lang.invoke.MethodHandles
 import kotlin.reflect.KClass
-
-/**
- * Lazily constructs a new logger using the provided class.
- *
- * @return A new [Lazy] instantiated [KLogger] for the invoking class.
- */
-inline fun <reified T> T.getLazyLogger(): Lazy<KLogger> = lazy { getLogger(T::class) }
-
-/**
- * Lazily constructs a new logger using the provided class.
- *
- * @param clazz Class used for constructing the logger.
- * @return A new [Lazy] instantiated [KLogger] for the respective class.
- */
-@JvmSynthetic
-inline fun getLazyLogger(clazz: KClass<*>): Lazy<KLogger> = lazy { getLogger(clazz) }
-
-/**
- * Lazily constructs a new logger using the provided class.
- *
- * @param clazz Class used for constructing the logger.
- * @return A new [Lazy] instantiated [KLogger] for the respective class.
- */
-@JvmSynthetic
-inline fun getLazyLogger(clazz: Class<*>): Lazy<KLogger> = lazy { getLogger(clazz) }
-
-/**
- * Lazily constructs a new logger using the provided name.
- *
- * @param name The name of the logger
- * @return A new [Lazy] instantiated [KLogger] for the provided name.
- */
-@JvmSynthetic
-inline fun getLazyLogger(name: String): Lazy<KLogger> = lazy { getLogger(name) }
-
-/**
- * Constructs a new top-level logger using [MethodHandles].
- *
- * Any classes attempting to get a logger should, by default, using the faster [getLogger].
- *
- * @return A new [Lazy] instantiated [KLogger] for the calling class.
- */
-@JvmSynthetic
-@Deprecated(
-    message = "You should use the version which is reified instead, to avoid the cost of expensive stack trace analysis. " +
-            "For top level loggers, use the alternative located in toplevel package.",
-    replaceWith = ReplaceWith(
-        "getLazyLogger()",
-        "org.slf4j.kotlin.toplevel.getLazyLogger", // Imports
-    ),
-    level = DeprecationLevel.HIDDEN,
-)
-inline fun getLazyLogger(): Lazy<KLogger> = lazy {
-    getLogger(MethodHandles.lookup().lookupClass())
-}
 
 /**
  * Constructs a new logger for the invoking class.
  *
  * @return A new [KLogger] for the invoking class.
  */
-inline fun <reified T> T.getLogger(): KLogger {
+public inline fun <reified T : Any> getLogger(): KLoggerDelegate<T> {
     return getLogger(T::class)
-} // using reified generic magic is faster than MethodHandles
+}
 
 /**
  * Constructs a new logger using the provided class.
  *
- * @param clazz Class used for constructing the logger.
+ * @param kClass Class used for constructing the logger.
  * @return A new [KLogger] for the respective class.
  */
 @JvmSynthetic
-inline fun getLogger(clazz: KClass<*>): KLogger {
-    val nonCompanionClass = if (clazz.isCompanion)
-        clazz.java.declaringClass?.kotlin ?: clazz
-    else
-        clazz
-    
-    return getLogger(nonCompanionClass.java)
+public inline fun <reified T : Any> getLogger(kClass: KClass<T> = T::class): KLoggerDelegate<T> {
+    return KLoggerCache.loggerDelegate(kClass.java)
 }
 
 /**
@@ -120,15 +57,8 @@ inline fun getLogger(clazz: KClass<*>): KLogger {
  * @return A new [KLogger] for the respective class.
  */
 @JvmSynthetic
-inline fun getLogger(clazz: Class<*>): KLogger {
-    val name = clazz.name
-    val sliced = name.substringBefore("$") // remove all the bullshit like MainKt$main$$inlined$readValue$1
-    val trueName = when { // top level files will have "Kt" added. Remove that. eg. MainKt -> Main.
-        sliced.endsWith("Kt") -> name.substringBeforeLast("Kt")
-        else                  -> name
-    }
-    
-    return KLogger(LoggerFactory.getLogger(trueName))
+public inline fun <reified T : Any> getLogger(clazz: Class<T> = T::class.java): KLoggerDelegate<T> {
+    return KLoggerCache.loggerDelegate(clazz)
 }
 
 /**
@@ -138,23 +68,6 @@ inline fun getLogger(clazz: Class<*>): KLogger {
  * @return A new [KLogger] for the provided name.
  */
 @JvmSynthetic
-inline fun getLogger(name: String): KLogger = KLogger(LoggerFactory.getLogger(name))
+@Suppress("UNCHECKED_CAST")
+public fun <T> getLogger(name: String): KLoggerDelegate<T> = KLoggerCache.loggerDelegate(name) as KLoggerDelegate<T>
 
-/**
- * Constructs a new top-level logger using [MethodHandles].
- *
- * Any classes attempting to get a logger should, by default, using the faster [getLogger].
- *
- * @return A new [KLogger] for the calling class.
- */
-@JvmSynthetic
-@Deprecated(
-    message = "You should use the version which is reified instead, to avoid the cost of expensive stack trace analysis. " +
-            "For top level loggers, use the alternative located in toplevel package.",
-    replaceWith = ReplaceWith(
-        "getLogger()",
-        "org.slf4j.kotlin.toplevel.getLogger", // Imports
-    ),
-    level = DeprecationLevel.HIDDEN,
-)
-inline fun getLogger(): KLogger = getLogger(MethodHandles.lookup().lookupClass())

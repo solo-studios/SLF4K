@@ -1,9 +1,9 @@
 /*
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
- * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file LoggerTest.kt is part of SLF4K
- * Last modified on 12-12-2021 04:14 p.m.
+ * Last modified on 20-11-2022 01:15 p.m.
  *
  * MIT License
  *
@@ -35,33 +35,42 @@ import kotlin.test.assertEquals
 class LoggerTest {
     @Test
     fun `test automatic logger name`() {
-        val logger by getLogger()
-        
-        assertEquals(LoggerTest::class.qualifiedName, logger.name)
+        val automaticLogger = AutomaticLoggerName()
+    
+        assertEquals(AutomaticLoggerName::class.qualifiedName, automaticLogger.logger.name)
     }
     
     @Test
     fun `test logger name by kclass`() {
-        val logger by getLogger(LoggerTest::class)
+        val loggerByKClass = LoggerNameByKClass()
         
-        assertEquals(LoggerTest::class.qualifiedName, logger.name)
+        assertEquals(LoggerNameByKClass::class.qualifiedName, loggerByKClass.logger.name)
     }
     
     @Test
-    fun `test logger by class name`() {
-        val logger by getLogger(LoggerTest::class.java)
-        
-        assertEquals(LoggerTest::class.qualifiedName, logger.name)
+    fun `test automatic logger name by companion`() {
+        assertEquals(AutomaticCompanionLoggerName::class.qualifiedName, AutomaticCompanionLoggerName.logger.name)
     }
     
     @Test
-    fun `test automatic logger name in lambda`() {
-        val lambda = {
-            val logger by getLogger()
-            
-            assertEquals(LoggerTest::class.qualifiedName, logger.name)
-        }
+    fun `test logger name by string`() {
+        val logger by getLogger("testing")
         
-        lambda()
+        
+        assertEquals("testing", logger.name)
     }
+}
+
+class AutomaticCompanionLoggerName {
+    companion object {
+        val logger by getLogger()
+    }
+}
+
+class AutomaticLoggerName {
+    val logger by getLogger()
+}
+
+class LoggerNameByKClass {
+    val logger by getLogger(LoggerNameByKClass::class)
 }

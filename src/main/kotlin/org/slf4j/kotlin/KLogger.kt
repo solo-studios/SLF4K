@@ -1,9 +1,9 @@
 /*
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
- * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KLogger.kt is part of SLF4K
- * Last modified on 12-12-2021 04:08 p.m.
+ * Last modified on 20-11-2022 01:12 p.m.
  *
  * MIT License
  *
@@ -28,7 +28,6 @@
 package org.slf4j.kotlin
 
 import org.slf4j.Logger
-import kotlin.reflect.KProperty
 
 /**
  * Wrapper around a [Logger] that delegates all calls to the internal logger.
@@ -37,16 +36,4 @@ import kotlin.reflect.KProperty
  *
  * @param delegate [Logger] instance to wrap.
  */
-open class KLogger(delegate: Logger) : Logger by delegate {
-    /**
-     * Operator to allow for property delegation of loggers.
-     *
-     * This is so you can do
-     * ```kotlin
-     * val logger by getLogger()
-     * ```
-     */
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): KLogger {
-        return this
-    }
-}
+public open class KLogger(delegate: Logger) : Logger by delegate

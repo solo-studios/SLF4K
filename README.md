@@ -12,6 +12,8 @@
 
 - Use kotlin features to cleanly get the appropriate logger for your class
 - Clean up kotlin class names to make logging easy to understand
+- Typed logger delegates: a logger instantiated using a class reference is only valid in that class
+- Lazy logger instantiation & logger cache
 
 ## Including
 
@@ -45,14 +47,30 @@ implementation("ca.solo-studios:slf4k:0.4.6")
 
 How to get a logger:
 
+#### Top Level
+
 ```kotlin
+import org.slf4j.kotlin.toplevel.getLogger
+
+
 val logger by getLogger()
 ```
 
-or
+#### Class
 
 ```kotlin
-val logger = getLogger()
+import org.slf4j.kotlin.getLogger
+
+
+class MyClass {
+    private val logger by getLogger() // or getLogger(MyClass::class)
+}
+```
+
+#### Named Logger
+
+```kotlin
+val logger by getLogger("name of logger here")
 ```
 
 ### Logging
@@ -89,10 +107,6 @@ val myMarker by getMarker("MY_MARKER")
 ```
 
 after which, they can be used normally.
-
-### Using MDC
-
-MDC is used the same as with SLF4J.
 
 ### MDC with Coroutines
 

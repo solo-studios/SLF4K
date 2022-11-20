@@ -1,9 +1,9 @@
 /*
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
- * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2022-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file LoggerCompanionTest.kt is part of SLF4K
- * Last modified on 12-12-2021 04:14 p.m.
+ * The file KLoggerDelegate.kt is part of SLF4K
+ * Last modified on 20-11-2022 01:06 p.m.
  *
  * MIT License
  *
@@ -26,27 +26,20 @@
  * SOFTWARE.
  */
 
-package ca.solostudios.slf4k
+package org.slf4j.kotlin
 
-import org.slf4j.kotlin.getLogger
-import kotlin.reflect.full.companionObject
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.slf4j.LoggerFactory
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
-class LoggerCompanionTest {
-    @Test
-    fun `test automatic logger name by companion`() {
-        assertEquals(LoggerCompanionTest::class.qualifiedName, logger.name)
+public class KLoggerDelegate<T>(
+        private val loggerNameProvider: () -> String
+) : ReadOnlyProperty<T, KLogger> {
+    private val lazyLogger: KLogger by lazy {
+        KLogger(LoggerFactory.getLogger(loggerNameProvider()))
     }
     
-    @Test
-    fun `test logger name by direct companion reference`() {
-        val logger by getLogger(LoggerCompanionTest::class.companionObject!!)
-        
-        assertEquals(LoggerCompanionTest::class.qualifiedName, logger.name)
-    }
-    
-    companion object {
-        private val logger by getLogger()
+    override fun getValue(thisRef: T, property: KProperty<*>): KLogger {
+        return lazyLogger
     }
 }

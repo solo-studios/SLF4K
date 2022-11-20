@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 19-11-2022 02:16 p.m.
+ * Last modified on 20-11-2022 11:25 a.m.
  *
  * MIT License
  *
@@ -46,6 +46,20 @@ version = "0.4.6"
 
 repositories {
     mavenCentral()
+}
+
+kotlin {
+    explicitApi()
+    target {
+        compilations.configureEach {
+            kotlinOptions {
+                allWarningsAsErrors = true
+                jvmTarget = "1.8"
+                apiVersion = "1.6"
+                languageVersion = "1.6"
+            }
+        }
+    }
 }
 
 kotlinter {

@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file Extensions.kt is part of SLF4K
- * Last modified on 19-11-2022 02:16 p.m.
+ * Last modified on 20-11-2022 11:26 a.m.
  *
  * MIT License
  *
@@ -25,8 +25,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("unused", "GrazieInspection")
-
 package org.slf4j.kotlin
 
 import org.slf4j.Marker
@@ -37,7 +35,7 @@ import org.slf4j.Marker
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.trace(crossinline message: () -> String) {
+public inline fun KLogger.trace(crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message())
 }
@@ -51,7 +49,7 @@ inline fun KLogger.trace(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("traceObject")
-inline fun KLogger.trace(crossinline message: () -> Any?) {
+public inline fun KLogger.trace(crossinline message: () -> Any?) {
     if (isTraceEnabled)
         trace(message().toString())
 }
@@ -74,7 +72,7 @@ inline fun KLogger.trace(crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""trace { "${"$"}{message()} ${"$"}arg" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.trace(arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.trace(arg: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), arg)
 }
@@ -98,7 +96,7 @@ inline fun KLogger.trace(arg: Any?, crossinline message: () -> String) {
     replaceWith = ReplaceWith("""trace { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.trace(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.trace(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), arg1, arg2)
 }
@@ -124,7 +122,7 @@ inline fun KLogger.trace(arg1: Any?, arg2: Any?, crossinline message: () -> Stri
     replaceWith = ReplaceWith("""trace { "${"$"}{message()} ${"$"}{arguments}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.trace(vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.trace(vararg arguments: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), *arguments)
 }
@@ -137,7 +135,7 @@ inline fun KLogger.trace(vararg arguments: Any?, crossinline message: () -> Stri
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.trace(throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.trace(throwable: Throwable?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(message(), throwable)
 }
@@ -153,7 +151,7 @@ inline fun KLogger.trace(throwable: Throwable?, crossinline message: () -> Strin
  */
 @JvmSynthetic
 @JvmName("traceObject")
-inline fun KLogger.trace(throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.trace(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isTraceEnabled)
         trace(message().toString(), throwable)
 }
@@ -165,7 +163,7 @@ inline fun KLogger.trace(throwable: Throwable?, crossinline message: () -> Any?)
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.trace(marker: Marker?, crossinline message: () -> String) {
+public inline fun KLogger.trace(marker: Marker?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message())
 }
@@ -180,7 +178,7 @@ inline fun KLogger.trace(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("traceObject")
-inline fun KLogger.trace(marker: Marker?, crossinline message: () -> Any?) {
+public inline fun KLogger.trace(marker: Marker?, crossinline message: () -> Any?) {
     if (isTraceEnabled)
         trace(message().toString(), marker)
 }
@@ -199,7 +197,7 @@ inline fun KLogger.trace(marker: Marker?, crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""trace(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.trace(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.trace(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), arg)
 }
@@ -220,7 +218,7 @@ inline fun KLogger.trace(marker: Marker?, arg: Any?, crossinline message: () -> 
     replaceWith = ReplaceWith("""trace(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.trace(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.trace(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), arg1, arg2)
 }
@@ -240,7 +238,7 @@ inline fun KLogger.trace(marker: Marker?, arg1: Any?, arg2: Any?, crossinline me
     replaceWith = ReplaceWith("""trace(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.trace(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.trace(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), arguments)
 }
@@ -254,7 +252,7 @@ inline fun KLogger.trace(marker: Marker?, vararg arguments: Any?, crossinline me
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.trace(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.trace(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isTraceEnabled)
         trace(marker, message(), throwable)
 }
@@ -271,7 +269,7 @@ inline fun KLogger.trace(marker: Marker?, throwable: Throwable?, crossinline mes
  */
 @JvmSynthetic
 @JvmName("traceObject")
-inline fun KLogger.trace(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.trace(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isTraceEnabled)
         trace(message().toString(), marker, throwable)
 }
@@ -282,7 +280,7 @@ inline fun KLogger.trace(marker: Marker?, throwable: Throwable?, crossinline mes
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.debug(crossinline message: () -> String) {
+public inline fun KLogger.debug(crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message())
 }
@@ -296,7 +294,7 @@ inline fun KLogger.debug(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("debugObject")
-inline fun KLogger.debug(crossinline message: () -> Any?) {
+public inline fun KLogger.debug(crossinline message: () -> Any?) {
     if (isDebugEnabled)
         debug(message().toString())
 }
@@ -319,7 +317,7 @@ inline fun KLogger.debug(crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""debug { "${"$"}{message()} ${"$"}{arg}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.debug(arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.debug(arg: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), arg)
 }
@@ -343,7 +341,7 @@ inline fun KLogger.debug(arg: Any?, crossinline message: () -> String) {
     replaceWith = ReplaceWith("""debug { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.debug(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.debug(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), arg1, arg2)
 }
@@ -370,7 +368,7 @@ inline fun KLogger.debug(arg1: Any?, arg2: Any?, crossinline message: () -> Stri
     replaceWith = ReplaceWith("""debug { "${"$"}{message()} ${"$"}{arguments}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.debug(vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.debug(vararg arguments: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), *arguments)
 }
@@ -383,7 +381,7 @@ inline fun KLogger.debug(vararg arguments: Any?, crossinline message: () -> Stri
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.debug(throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.debug(throwable: Throwable?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(message(), throwable)
 }
@@ -399,7 +397,7 @@ inline fun KLogger.debug(throwable: Throwable?, crossinline message: () -> Strin
  */
 @JvmSynthetic
 @JvmName("debugObject")
-inline fun KLogger.debug(throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.debug(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isDebugEnabled)
         debug(message().toString(), throwable)
 }
@@ -411,7 +409,7 @@ inline fun KLogger.debug(throwable: Throwable?, crossinline message: () -> Any?)
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.debug(marker: Marker?, crossinline message: () -> String) {
+public inline fun KLogger.debug(marker: Marker?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message())
 }
@@ -426,7 +424,7 @@ inline fun KLogger.debug(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("debugObject")
-inline fun KLogger.debug(marker: Marker?, crossinline message: () -> Any?) {
+public inline fun KLogger.debug(marker: Marker?, crossinline message: () -> Any?) {
     if (isDebugEnabled)
         debug(message().toString(), marker)
 }
@@ -445,7 +443,7 @@ inline fun KLogger.debug(marker: Marker?, crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""debug(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.debug(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.debug(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), arg)
 }
@@ -466,7 +464,7 @@ inline fun KLogger.debug(marker: Marker?, arg: Any?, crossinline message: () -> 
     replaceWith = ReplaceWith("""debug(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.debug(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.debug(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), arg1, arg2)
 }
@@ -486,7 +484,7 @@ inline fun KLogger.debug(marker: Marker?, arg1: Any?, arg2: Any?, crossinline me
     replaceWith = ReplaceWith("""debug(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.debug(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.debug(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), arguments)
 }
@@ -500,7 +498,7 @@ inline fun KLogger.debug(marker: Marker?, vararg arguments: Any?, crossinline me
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.debug(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.debug(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isDebugEnabled)
         debug(marker, message(), throwable)
 }
@@ -517,7 +515,7 @@ inline fun KLogger.debug(marker: Marker?, throwable: Throwable?, crossinline mes
  */
 @JvmSynthetic
 @JvmName("debugObject")
-inline fun KLogger.debug(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.debug(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isDebugEnabled)
         debug(message().toString(), marker, throwable)
 }
@@ -528,7 +526,7 @@ inline fun KLogger.debug(marker: Marker?, throwable: Throwable?, crossinline mes
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.info(crossinline message: () -> String) {
+public inline fun KLogger.info(crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message())
 }
@@ -542,7 +540,7 @@ inline fun KLogger.info(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("infoObject")
-inline fun KLogger.info(crossinline message: () -> Any?) {
+public inline fun KLogger.info(crossinline message: () -> Any?) {
     if (isInfoEnabled)
         info(message().toString())
 }
@@ -565,7 +563,7 @@ inline fun KLogger.info(crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""info { "${"$"}{message()} ${"$"}{arg}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.info(arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.info(arg: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), arg)
 }
@@ -589,7 +587,7 @@ inline fun KLogger.info(arg: Any?, crossinline message: () -> String) {
     replaceWith = ReplaceWith("""info { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.info(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.info(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), arg1, arg2)
 }
@@ -616,7 +614,7 @@ inline fun KLogger.info(arg1: Any?, arg2: Any?, crossinline message: () -> Strin
     replaceWith = ReplaceWith("""info { "${"$"}{message()} ${"$"}{arguments}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.info(vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.info(vararg arguments: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), *arguments)
 }
@@ -629,7 +627,7 @@ inline fun KLogger.info(vararg arguments: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.info(throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.info(throwable: Throwable?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(message(), throwable)
 }
@@ -645,7 +643,7 @@ inline fun KLogger.info(throwable: Throwable?, crossinline message: () -> String
  */
 @JvmSynthetic
 @JvmName("infoObject")
-inline fun KLogger.info(throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.info(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isInfoEnabled)
         info(message().toString(), throwable)
 }
@@ -657,7 +655,7 @@ inline fun KLogger.info(throwable: Throwable?, crossinline message: () -> Any?) 
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.info(marker: Marker?, crossinline message: () -> String) {
+public inline fun KLogger.info(marker: Marker?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message())
 }
@@ -672,7 +670,7 @@ inline fun KLogger.info(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("infoObject")
-inline fun KLogger.info(marker: Marker?, crossinline message: () -> Any?) {
+public inline fun KLogger.info(marker: Marker?, crossinline message: () -> Any?) {
     if (isInfoEnabled)
         info(message().toString(), marker)
 }
@@ -691,7 +689,7 @@ inline fun KLogger.info(marker: Marker?, crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""info(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.info(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.info(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), arg)
 }
@@ -712,7 +710,7 @@ inline fun KLogger.info(marker: Marker?, arg: Any?, crossinline message: () -> S
     replaceWith = ReplaceWith("""info(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.info(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.info(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), arg1, arg2)
 }
@@ -732,7 +730,7 @@ inline fun KLogger.info(marker: Marker?, arg1: Any?, arg2: Any?, crossinline mes
     replaceWith = ReplaceWith("""info(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.info(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.info(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), arguments)
 }
@@ -746,7 +744,7 @@ inline fun KLogger.info(marker: Marker?, vararg arguments: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.info(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.info(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isInfoEnabled)
         info(marker, message(), throwable)
 }
@@ -763,7 +761,7 @@ inline fun KLogger.info(marker: Marker?, throwable: Throwable?, crossinline mess
  */
 @JvmSynthetic
 @JvmName("infoObject")
-inline fun KLogger.info(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.info(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isInfoEnabled)
         info(message().toString(), marker, throwable)
 }
@@ -774,7 +772,7 @@ inline fun KLogger.info(marker: Marker?, throwable: Throwable?, crossinline mess
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.warn(crossinline message: () -> String) {
+public inline fun KLogger.warn(crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message())
 }
@@ -788,7 +786,7 @@ inline fun KLogger.warn(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("warnObject")
-inline fun KLogger.warn(crossinline message: () -> Any?) {
+public inline fun KLogger.warn(crossinline message: () -> Any?) {
     if (isWarnEnabled)
         warn(message().toString())
 }
@@ -811,7 +809,7 @@ inline fun KLogger.warn(crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""warn { "${"$"}{message()} ${"$"}{arg}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.warn(arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.warn(arg: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), arg)
 }
@@ -835,7 +833,7 @@ inline fun KLogger.warn(arg: Any?, crossinline message: () -> String) {
     replaceWith = ReplaceWith("""warn { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.warn(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.warn(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), arg1, arg2)
 }
@@ -862,7 +860,7 @@ inline fun KLogger.warn(arg1: Any?, arg2: Any?, crossinline message: () -> Strin
     replaceWith = ReplaceWith("""warn { "${"$"}{message()} ${"$"}{arguments}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.warn(vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.warn(vararg arguments: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), *arguments)
 }
@@ -875,7 +873,7 @@ inline fun KLogger.warn(vararg arguments: Any?, crossinline message: () -> Strin
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.warn(throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.warn(throwable: Throwable?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(message(), throwable)
 }
@@ -891,7 +889,7 @@ inline fun KLogger.warn(throwable: Throwable?, crossinline message: () -> String
  */
 @JvmSynthetic
 @JvmName("warnObject")
-inline fun KLogger.warn(throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.warn(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isWarnEnabled)
         warn(message().toString(), throwable)
 }
@@ -903,7 +901,7 @@ inline fun KLogger.warn(throwable: Throwable?, crossinline message: () -> Any?) 
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.warn(marker: Marker?, crossinline message: () -> String) {
+public inline fun KLogger.warn(marker: Marker?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message())
 }
@@ -918,7 +916,7 @@ inline fun KLogger.warn(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("warnObject")
-inline fun KLogger.warn(marker: Marker?, crossinline message: () -> Any?) {
+public inline fun KLogger.warn(marker: Marker?, crossinline message: () -> Any?) {
     if (isWarnEnabled)
         warn(message().toString(), marker)
 }
@@ -937,7 +935,7 @@ inline fun KLogger.warn(marker: Marker?, crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""warn(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.warn(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.warn(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), arg)
 }
@@ -958,7 +956,7 @@ inline fun KLogger.warn(marker: Marker?, arg: Any?, crossinline message: () -> S
     replaceWith = ReplaceWith("""warn(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.warn(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.warn(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), arg1, arg2)
 }
@@ -978,7 +976,7 @@ inline fun KLogger.warn(marker: Marker?, arg1: Any?, arg2: Any?, crossinline mes
     replaceWith = ReplaceWith("""warn(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.warn(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.warn(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), arguments)
 }
@@ -992,7 +990,7 @@ inline fun KLogger.warn(marker: Marker?, vararg arguments: Any?, crossinline mes
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.warn(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.warn(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isWarnEnabled)
         warn(marker, message(), throwable)
 }
@@ -1009,7 +1007,7 @@ inline fun KLogger.warn(marker: Marker?, throwable: Throwable?, crossinline mess
  */
 @JvmSynthetic
 @JvmName("warnObject")
-inline fun KLogger.warn(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.warn(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isWarnEnabled)
         warn(message().toString(), marker, throwable)
 }
@@ -1020,7 +1018,7 @@ inline fun KLogger.warn(marker: Marker?, throwable: Throwable?, crossinline mess
  * @param message a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.error(crossinline message: () -> String) {
+public inline fun KLogger.error(crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message())
 }
@@ -1034,7 +1032,7 @@ inline fun KLogger.error(crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("errorObject")
-inline fun KLogger.error(crossinline message: () -> Any?) {
+public inline fun KLogger.error(crossinline message: () -> Any?) {
     if (isErrorEnabled)
         error(message().toString())
 }
@@ -1057,7 +1055,7 @@ inline fun KLogger.error(crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""error { "${"$"}{message()} ${"$"}{arg}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.error(arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.error(arg: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), arg)
 }
@@ -1081,7 +1079,7 @@ inline fun KLogger.error(arg: Any?, crossinline message: () -> String) {
     replaceWith = ReplaceWith("""error { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.error(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.error(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), arg1, arg2)
 }
@@ -1108,7 +1106,7 @@ inline fun KLogger.error(arg1: Any?, arg2: Any?, crossinline message: () -> Stri
     replaceWith = ReplaceWith("""error { "${"$"}{message()} ${"$"}{arguments}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.error(vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.error(vararg arguments: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), *arguments)
 }
@@ -1121,7 +1119,7 @@ inline fun KLogger.error(vararg arguments: Any?, crossinline message: () -> Stri
  * @param message   a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.error(throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.error(throwable: Throwable?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(message(), throwable)
 }
@@ -1137,7 +1135,7 @@ inline fun KLogger.error(throwable: Throwable?, crossinline message: () -> Strin
  */
 @JvmSynthetic
 @JvmName("errorObject")
-inline fun KLogger.error(throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.error(throwable: Throwable?, crossinline message: () -> Any?) {
     if (isErrorEnabled)
         error(message().toString(), throwable)
 }
@@ -1149,7 +1147,7 @@ inline fun KLogger.error(throwable: Throwable?, crossinline message: () -> Any?)
  * @param message a lazy evaluated block providing the format string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.error(marker: Marker?, crossinline message: () -> String) {
+public inline fun KLogger.error(marker: Marker?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message())
 }
@@ -1164,7 +1162,7 @@ inline fun KLogger.error(marker: Marker?, crossinline message: () -> String) {
  */
 @JvmSynthetic
 @JvmName("errorObject")
-inline fun KLogger.error(marker: Marker?, crossinline message: () -> Any?) {
+public inline fun KLogger.error(marker: Marker?, crossinline message: () -> Any?) {
     if (isErrorEnabled)
         error(message().toString(), marker)
 }
@@ -1183,7 +1181,7 @@ inline fun KLogger.error(marker: Marker?, crossinline message: () -> Any?) {
     replaceWith = ReplaceWith("""error(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.error(marker: Marker?, arg: Any?, crossinline message: () -> String) {
+public inline fun KLogger.error(marker: Marker?, arg: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), arg)
 }
@@ -1204,7 +1202,7 @@ inline fun KLogger.error(marker: Marker?, arg: Any?, crossinline message: () -> 
     replaceWith = ReplaceWith("""error(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.error(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
+public inline fun KLogger.error(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), arg1, arg2)
 }
@@ -1224,7 +1222,7 @@ inline fun KLogger.error(marker: Marker?, arg1: Any?, arg2: Any?, crossinline me
     replaceWith = ReplaceWith("""error(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
     level = DeprecationLevel.ERROR,
 )
-inline fun KLogger.error(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
+public inline fun KLogger.error(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), arguments)
 }
@@ -1239,7 +1237,7 @@ inline fun KLogger.error(marker: Marker?, vararg arguments: Any?, crossinline me
  * @param message   a lazy evaluated block providing the message string to be logged
  */
 @JvmSynthetic
-inline fun KLogger.error(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
+public inline fun KLogger.error(marker: Marker?, throwable: Throwable?, crossinline message: () -> String) {
     if (isErrorEnabled)
         error(marker, message(), throwable)
 }
@@ -1257,7 +1255,7 @@ inline fun KLogger.error(marker: Marker?, throwable: Throwable?, crossinline mes
  */
 @JvmSynthetic
 @JvmName("errorObject")
-inline fun KLogger.error(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
+public inline fun KLogger.error(marker: Marker?, throwable: Throwable?, crossinline message: () -> Any?) {
     if (isErrorEnabled)
         error(message().toString(), marker, throwable)
 }

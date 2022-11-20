@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file TopLevelLogger.kt is part of SLF4K
- * Last modified on 19-11-2022 02:16 p.m.
+ * Last modified on 20-11-2022 01:00 p.m.
  *
  * MIT License
  *
@@ -30,20 +30,11 @@
 package org.slf4j.kotlin.toplevel
 
 import org.slf4j.kotlin.KLogger
+import org.slf4j.kotlin.KLoggerCache
+import org.slf4j.kotlin.KLoggerDelegate
 import org.slf4j.kotlin.getLogger
 import java.lang.invoke.MethodHandles
 
-/**
- * Constructs a new top-level logger using [MethodHandles].
- *
- * Any classes attempting to get a logger should, by default, using the faster [getLogger].
- *
- * @return A new [Lazy] instantiated [KLogger] for the calling class.
- */
-@JvmSynthetic
-inline fun getLazyLogger(): Lazy<KLogger> = lazy {
-    getLogger(MethodHandles.lookup().lookupClass())
-}
 
 /**
  * Constructs a new top-level logger using [MethodHandles].
@@ -53,5 +44,4 @@ inline fun getLazyLogger(): Lazy<KLogger> = lazy {
  * @return A new [KLogger] for the calling class.
  */
 @JvmSynthetic
-inline fun getLogger(): KLogger = getLogger(MethodHandles.lookup().lookupClass())
-
+public inline fun getLogger(): KLoggerDelegate<*> = KLoggerCache.loggerDelegate(MethodHandles.lookup().lookupClass())

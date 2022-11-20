@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file Marker.kt is part of SLF4K
- * Last modified on 19-11-2022 02:16 p.m.
+ * Last modified on 20-11-2022 01:12 p.m.
  *
  * MIT License
  *
@@ -25,7 +25,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("NOTHING_TO_INLINE", "unused")
 
 package org.slf4j.kotlin
 
@@ -38,7 +37,7 @@ import org.slf4j.MarkerFactory
  * @return A [Lazy] instantiated [KMarker] for the provided name.
  */
 @JvmSynthetic
-inline fun getLazyMarker(name: String): Lazy<KMarker> = lazy { getMarker(name) }
+public fun getLazyMarker(name: String): Lazy<KMarker> = lazy { getMarker(name) }
 
 /**
  * Constructs a new *detached* marker using the provided name.
@@ -49,7 +48,7 @@ inline fun getLazyMarker(name: String): Lazy<KMarker> = lazy { getMarker(name) }
  * @return A [KMarker] with the provided name.
  */
 @JvmSynthetic
-inline fun getLazyDetachedMarker(name: String): Lazy<KMarker> = lazy { getDetachedMarker(name) }
+public fun getLazyDetachedMarker(name: String): Lazy<KMarker> = lazy { getDetachedMarker(name) }
 
 /**
  * Constructs a new marker using the provided name.
@@ -58,7 +57,7 @@ inline fun getLazyDetachedMarker(name: String): Lazy<KMarker> = lazy { getDetach
  * @return A [KMarker] with the provided name.
  */
 @JvmSynthetic
-inline fun getMarker(name: String): KMarker = KMarker(MarkerFactory.getMarker(name))
+public fun getMarker(name: String): KMarker = KMarker(MarkerFactory.getMarker(name))
 
 /**
  * Constructs a new *detached* marker using the provided name.
@@ -69,4 +68,4 @@ inline fun getMarker(name: String): KMarker = KMarker(MarkerFactory.getMarker(na
  * @return A *new* [KMarker] with the provided name.
  */
 @JvmSynthetic
-inline fun getDetachedMarker(name: String): KMarker = KMarker(MarkerFactory.getDetachedMarker(name))
+public fun getDetachedMarker(name: String): KMarker = KMarker(MarkerFactory.getDetachedMarker(name))
