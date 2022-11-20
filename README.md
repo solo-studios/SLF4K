@@ -43,8 +43,7 @@ implementation("ca.solo-studios:slf4k:0.5.1")
 
 ## SLF4J 2.0.0
 
-The current version of SLF4K depends on version ${versions.slf4j}, however it should be compatible with all versions
-higher that are greater than 2.0.0.
+The current version of SLF4K should be compatible with all versions higher that are greater than 2.0.0.
 
 ## Examples
 
