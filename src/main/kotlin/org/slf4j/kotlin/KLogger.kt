@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KLogger.kt is part of SLF4K
- * Last modified on 20-11-2022 01:12 p.m.
+ * Last modified on 20-11-2022 01:18 p.m.
  *
  * MIT License
  *
@@ -36,4 +36,4 @@ import org.slf4j.Logger
  *
  * @param delegate [Logger] instance to wrap.
  */
-public open class KLogger(delegate: Logger) : Logger by delegate
+public class KLogger(delegate: Logger) : Logger by delegate
