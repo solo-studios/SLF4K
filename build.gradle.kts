@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 20-11-2022 11:25 a.m.
+ * Last modified on 20-11-2022 01:55 p.m.
  *
  * MIT License
  *
@@ -73,6 +73,7 @@ kotlinter {
         "indent",
         "no-trailing-spaces",
         "multiline-if-else",
+        "filename"
     )
 }
 

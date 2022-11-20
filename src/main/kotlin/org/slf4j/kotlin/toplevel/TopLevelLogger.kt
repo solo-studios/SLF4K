@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file TopLevelLogger.kt is part of SLF4K
- * Last modified on 20-11-2022 01:00 p.m.
+ * Last modified on 20-11-2022 01:54 p.m.
  *
  * MIT License
  *
@@ -25,7 +25,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("NOTHING_TO_INLINE", "unused")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package org.slf4j.kotlin.toplevel
 
