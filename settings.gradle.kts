@@ -1,9 +1,9 @@
 /*
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
- * Copyright (c) 2021-2021 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file settings.gradle.kts is part of SLF4K
- * Last modified on 06-09-2021 02:38 p.m.
+ * Last modified on 20-11-2022 02:07 p.m.
  *
  * MIT License
  *
@@ -28,3 +28,20 @@
 
 rootProject.name = "SLF4K"
 
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.jetbrains.dokka:versioning-plugin:1.7.20")
+        classpath("org.jetbrains.dokka:dokka-core:1.7.20")
+        classpath("org.jetbrains.dokka:dokka-base:1.7.20")
+    }
+}

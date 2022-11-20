@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 20-11-2022 01:55 p.m.
+ * Last modified on 20-11-2022 03:25 p.m.
  *
  * MIT License
  *
@@ -26,9 +26,15 @@
  * SOFTWARE.
  */
 
+@file:Suppress("UnstableApiUsage")
+
+import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jmailen.gradle.kotlinter.tasks.InstallPreCommitHookTask
+import java.net.URL
+import java.time.Year
+import kotlin.math.max
 
 plugins {
     java
@@ -42,7 +48,8 @@ plugins {
 }
 
 group = "ca.solo-studios"
-version = "0.5.0"
+val versionObj = Version("0", "5", "0")
+version = versionObj.toString()
 
 repositories {
     mavenCentral()
@@ -77,13 +84,16 @@ kotlinter {
     )
 }
 
+val slf4jVersion = "2.0.3"
+val kotlinxCoroutinesVersion = "1.6.4"
+
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     
-    api("org.slf4j:slf4j-api:2.0.3")
+    api("org.slf4j:slf4j-api:$slf4jVersion")
     
-    compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
     // compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.6.4")
     
     kspTest("ca.solo-studios:ksp-service-annotation:1.0.1")
@@ -91,25 +101,83 @@ dependencies {
     testCompileOnly("ca.solo-studios:ksp-service-annotation:1.0.1")
     
     testImplementation(kotlin("test"))
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    testImplementation("org.slf4j:slf4j-simple:2.0.3")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
+    testImplementation("org.slf4j:slf4j-simple:$slf4jVersion")
 }
 
-val installKotlinterPreCommitHook by tasks.registering(InstallPreCommitHookTask::class) {
-    group = "build setup"
-    description = "Installs Kotlinter Git pre-commit hook"
+tasks {
+    val installKotlinterPreCommitHook by registering(InstallPreCommitHookTask::class) {
+        group = "build setup"
+        description = "Installs Kotlinter Git pre-commit hook"
+    }
+    
+    check {
+        dependsOn(installKotlinterPreCommitHook)
+    }
+    
+    withType<Test>().configureEach {
+        useJUnitPlatform()
+        
+        failFast = false
+        maxParallelForks = max(Runtime.getRuntime().availableProcessors() - 1, 1)
+    }
+    
+    withType<Javadoc>().configureEach {
+        options {
+            encoding = "UTF-8"
+        }
+    }
+    
+    withType<Jar>().configureEach {
+        metaInf {
+            from(rootProject.file("LICENSE"))
+        }
+    }
+    
+    withType<DokkaTask>().configureEach {
+        dependsOn(processDokkaIncludes)
+        
+        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+            footerMessage = "© ${Year.now()} Copyright solo-studios"
+            separateInheritedMembers = true
+        }
+        suppressInheritedMembers
+        
+        dokkaSourceSets.configureEach {
+            includes.from(processDokkaIncludes.destinationDir.listFiles())
+            
+            jdkVersion.set(8)
+            reportUndocumented.set(true)
+            
+            // Documentation link
+            sourceLink {
+                localDirectory.set(file("src/main/kotlin"))
+                remoteUrl.set(URL("https://github.com/solo-studios/SLF4K/tree/master/src/main/kotlin"))
+                remoteLineSuffix.set("#L")
+            }
+            
+            externalDocumentationLink("https://www.slf4j.org/apidocs/")
+        }
+        
+        group = JavaBasePlugin.DOCUMENTATION_GROUP
+    }
 }
 
-tasks.check {
-    dependsOn(installKotlinterPreCommitHook)
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+val processDokkaIncludes by tasks.register("processDokkaIncludes", ProcessResources::class) {
+    from(projectDir.resolve("dokka/includes")) {
+        val projectInfo = ProjectInfo(project.group.toString(), project.name, versionObj)
+        filesMatching("Module.md") {
+            expand(
+                "project" to projectInfo,
+                "versions" to mapOf(
+                    "slf4j" to slf4jVersion,
+                    "kotlinxCoroutines" to kotlinxCoroutinesVersion,
+                ),
+            )
+        }
+    }
+    destinationDir = buildDir.resolve("dokka-include")
+    group = JavaBasePlugin.DOCUMENTATION_GROUP
 }
 
 val dokkaHtml by tasks.getting(DokkaTask::class)
@@ -118,41 +186,43 @@ val javadoc by tasks.getting(Javadoc::class)
 
 val jar by tasks.getting(Jar::class)
 
-val javadocJar by tasks.creating(Jar::class) {
+val javadocJar by tasks.registering(Jar::class) {
     dependsOn(dokkaHtml)
-    archiveClassifier.set("javadoc")
     from(dokkaHtml.outputDirectory)
+    archiveClassifier.set("javadoc")
+    group = JavaBasePlugin.DOCUMENTATION_GROUP
 }
 
-val sourcesJar by tasks.creating(Jar::class) {
-    archiveClassifier.set("sources")
+val sourcesJar by tasks.registering(Jar::class) {
     from(sourceSets["main"].allSource)
+    archiveClassifier.set("sources")
+    group = JavaBasePlugin.DOCUMENTATION_GROUP
 }
 
 artifacts {
+    archives(jar)
     archives(sourcesJar)
     archives(javadocJar)
-    archives(jar)
 }
 
 publishing {
     publications {
         create<MavenPublication>("maven") {
+            artifact(jar)
             artifact(sourcesJar)
             artifact(javadocJar)
-            artifact(jar)
-            
+    
             version = version as String
             groupId = group as String
             artifactId = "slf4k"
-            
+    
             pom {
                 name.set("SLF4K")
                 description.set("A set of SLF4J extensions for Kotlin to make logging more idiomatic.")
                 url.set("https://github.com/solo-studios/SLF4K")
-                
+        
                 inceptionYear.set("2021")
-                
+        
                 licenses {
                     license {
                         name.set("MIT License")
@@ -198,3 +268,15 @@ signing {
     useGpgCmd()
     sign(publishing.publications["maven"])
 }
+
+/**
+ * Version class, which does version stuff.
+ */
+data class Version(val major: String, val minor: String, val patch: String) {
+    override fun toString(): String = "$major.$minor.$patch"
+}
+
+/**
+ * Project info class for [processDokkaIncludes].
+ */
+data class ProjectInfo(val group: String, val module: String, val version: Version)

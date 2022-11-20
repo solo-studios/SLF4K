@@ -3,7 +3,7 @@
  * Copyright (c) 2022-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KLoggerCache.kt is part of SLF4K
- * Last modified on 20-11-2022 01:11 p.m.
+ * Last modified on 20-11-2022 02:45 p.m.
  *
  * MIT License
  *
@@ -30,9 +30,15 @@ package org.slf4j.kotlin
 
 import java.util.concurrent.ConcurrentHashMap
 
+/**
+ * A cache of [KLoggerDelegate]s
+ */
 public object KLoggerCache {
     private val loggerDelegateCache: MutableMap<String, KLoggerDelegate<*>> = ConcurrentHashMap()
     
+    /**
+     * Retrieves a [KLoggerDelegate] for a given class
+     */
     public fun <T : Any> loggerDelegate(clazz: Class<T>): KLoggerDelegate<T> {
         @Suppress("UNCHECKED_CAST")
         return loggerDelegateCache.getOrPut(clazz.name) {
@@ -42,6 +48,9 @@ public object KLoggerCache {
         } as KLoggerDelegate<T>
     }
     
+    /**
+     * Retrieves a [KLoggerDelegate] for a given name
+     */
     public fun loggerDelegate(name: String): KLoggerDelegate<*> {
         return loggerDelegateCache.getOrPut(name) {
             KLoggerDelegate<Any> { name }
