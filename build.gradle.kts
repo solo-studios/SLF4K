@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 20-11-2022 03:26 p.m.
+ * Last modified on 20-11-2022 03:49 p.m.
  *
  * MIT License
  *
@@ -141,7 +141,6 @@ tasks {
             footerMessage = "© ${Year.now()} Copyright solo-studios"
             separateInheritedMembers = true
         }
-        suppressInheritedMembers
         
         dokkaSourceSets.configureEach {
             includes.from(processDokkaIncludes.destinationDir.listFiles())
