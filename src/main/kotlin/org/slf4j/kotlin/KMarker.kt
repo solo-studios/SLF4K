@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KMarker.kt is part of SLF4K
- * Last modified on 20-11-2022 01:18 p.m.
+ * Last modified on 20-11-2022 01:51 p.m.
  *
  * MIT License
  *
@@ -28,7 +28,6 @@
 package org.slf4j.kotlin
 
 import org.slf4j.Marker
-import kotlin.reflect.KProperty
 
 /**
  * Wrapper around a [Marker] that delegates all calls to the internal logger.
@@ -38,19 +37,7 @@ import kotlin.reflect.KProperty
  * @param delegate [Marker] instance to wrap.
  */
 public class KMarker(delegate: Marker) : Marker by delegate {
-    /**
-     * Operator to allow for property delegation of loggers.
-     *
-     * This is so you can do
-     * ```kotlin
-     * val myMarker by getMarker("MY_MARKER")
-     * ```
-     */
-    public operator fun getValue(thisRef: Any?, property: KProperty<*>): KMarker {
-        return this
-    }
-    
     public companion object {
-        private const val serialVersionUID: Long = -5358242394706542917L
+        private const val serialVersionUID: Long = -3375422012032782870L
     }
 }

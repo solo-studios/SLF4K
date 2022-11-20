@@ -103,7 +103,7 @@ logger.warn(exception) { "message" }
 Markers can also be really easily instantiated, as follows:
 
 ```kotlin
-val myMarker by getMarker("MY_MARKER")
+val myMarker = getMarker("MY_MARKER")
 ```
 
 after which, they can be used normally.
