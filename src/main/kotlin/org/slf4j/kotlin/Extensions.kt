@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file Extensions.kt is part of SLF4K
- * Last modified on 20-11-2022 11:26 a.m.
+ * Last modified on 20-11-2022 01:20 p.m.
  *
  * MIT License
  *
@@ -52,79 +52,6 @@ public inline fun KLogger.trace(crossinline message: () -> String) {
 public inline fun KLogger.trace(crossinline message: () -> Any?) {
     if (isTraceEnabled)
         trace(message().toString())
-}
-
-/**
- * Log a message at the TRACE level according to the specified format
- * and argument.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the TRACE level.
- *
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""trace { "${"$"}{message()} ${"$"}arg" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.trace(arg: Any?, crossinline message: () -> String) {
-    if (isTraceEnabled)
-        trace(message(), arg)
-}
-
-/**
- * Log a message at the TRACE level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the TRACE level.
- *
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""trace { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.trace(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isTraceEnabled)
-        trace(message(), arg1, arg2)
-}
-
-/**
- * Log a message at the TRACE level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous string concatenation when the logger
- * is disabled for the TRACE level. However, this variant incurs the hidden
- * (and relatively small) cost of creating an `Object[]` before invoking the method,
- * even if this logger is disabled for TRACE. The variants taking [one][trace] and
- * [two][trace] arguments exist solely in order to avoid this hidden cost.
- *
- * @param arguments a list of 3 or more arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""trace { "${"$"}{message()} ${"$"}{arguments}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.trace(vararg arguments: Any?, crossinline message: () -> String) {
-    if (isTraceEnabled)
-        trace(message(), *arguments)
 }
 
 /**
@@ -187,66 +114,6 @@ public inline fun KLogger.trace(marker: Marker?, crossinline message: () -> Any?
  * This method is similar to [trace] method except that the
  * marker data is also taken into consideration.
  *
- * @param marker  the marker data specific to this log statement
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""trace(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.trace(marker: Marker?, arg: Any?, crossinline message: () -> String) {
-    if (isTraceEnabled)
-        trace(marker, message(), arg)
-}
-
-/**
- * This method is similar to [trace]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker  the marker data specific to this log statement
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""trace(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.trace(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isTraceEnabled)
-        trace(marker, message(), arg1, arg2)
-}
-
-/**
- * This method is similar to [trace]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker    the marker data specific to this log statement
- * @param arguments an array of arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""trace(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.trace(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
-    if (isTraceEnabled)
-        trace(marker, message(), arguments)
-}
-
-/**
- * This method is similar to [trace] method except that the
- * marker data is also taken into consideration.
- *
  * @param marker    the marker data specific to this log statement
  * @param throwable the exception (throwable) to log
  * @param message   a lazy evaluated block providing the message string to be logged
@@ -297,80 +164,6 @@ public inline fun KLogger.debug(crossinline message: () -> String) {
 public inline fun KLogger.debug(crossinline message: () -> Any?) {
     if (isDebugEnabled)
         debug(message().toString())
-}
-
-/**
- * Log a message at the DEBUG level according to the specified format
- * and argument.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the DEBUG level.
- *
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""debug { "${"$"}{message()} ${"$"}{arg}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.debug(arg: Any?, crossinline message: () -> String) {
-    if (isDebugEnabled)
-        debug(message(), arg)
-}
-
-/**
- * Log a message at the DEBUG level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the DEBUG level.
- *
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""debug { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.debug(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isDebugEnabled)
-        debug(message(), arg1, arg2)
-}
-
-/**
- * Log a message at the DEBUG level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous string concatenation when the logger
- * is disabled for the DEBUG level. However, this variant incurs the hidden
- * (and relatively small) cost of creating an `Object[]` before invoking the method,
- * even if this logger is disabled for DEBUG. The variants taking
- * [one][debug] and [two][debug]
- * arguments exist solely in order to avoid this hidden cost.
- *
- * @param arguments a list of 3 or more arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""debug { "${"$"}{message()} ${"$"}{arguments}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.debug(vararg arguments: Any?, crossinline message: () -> String) {
-    if (isDebugEnabled)
-        debug(message(), *arguments)
 }
 
 /**
@@ -433,66 +226,6 @@ public inline fun KLogger.debug(marker: Marker?, crossinline message: () -> Any?
  * This method is similar to [debug] method except that the
  * marker data is also taken into consideration.
  *
- * @param marker  the marker data specific to this log statement
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""debug(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.debug(marker: Marker?, arg: Any?, crossinline message: () -> String) {
-    if (isDebugEnabled)
-        debug(marker, message(), arg)
-}
-
-/**
- * This method is similar to [debug]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker  the marker data specific to this log statement
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""debug(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.debug(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isDebugEnabled)
-        debug(marker, message(), arg1, arg2)
-}
-
-/**
- * This method is similar to [debug]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker    the marker data specific to this log statement
- * @param arguments an array of arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""debug(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.debug(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
-    if (isDebugEnabled)
-        debug(marker, message(), arguments)
-}
-
-/**
- * This method is similar to [debug] method except that the
- * marker data is also taken into consideration.
- *
  * @param marker    the marker data specific to this log statement
  * @param throwable the exception (throwable) to log
  * @param message   a lazy evaluated block providing the message string to be logged
@@ -543,80 +276,6 @@ public inline fun KLogger.info(crossinline message: () -> String) {
 public inline fun KLogger.info(crossinline message: () -> Any?) {
     if (isInfoEnabled)
         info(message().toString())
-}
-
-/**
- * Log a message at the INFO level according to the specified format
- * and argument.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the INFO level.
- *
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""info { "${"$"}{message()} ${"$"}{arg}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.info(arg: Any?, crossinline message: () -> String) {
-    if (isInfoEnabled)
-        info(message(), arg)
-}
-
-/**
- * Log a message at the INFO level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the INFO level.
- *
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""info { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.info(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isInfoEnabled)
-        info(message(), arg1, arg2)
-}
-
-/**
- * Log a message at the INFO level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous string concatenation when the logger
- * is disabled for the INFO level. However, this variant incurs the hidden
- * (and relatively small) cost of creating an `Object[]` before invoking the method,
- * even if this logger is disabled for INFO. The variants taking
- * [one][info] and [two][info]
- * arguments exist solely in order to avoid this hidden cost.
- *
- * @param arguments a list of 3 or more arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""info { "${"$"}{message()} ${"$"}{arguments}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.info(vararg arguments: Any?, crossinline message: () -> String) {
-    if (isInfoEnabled)
-        info(message(), *arguments)
 }
 
 /**
@@ -676,66 +335,6 @@ public inline fun KLogger.info(marker: Marker?, crossinline message: () -> Any?)
 }
 
 /**
- * This method is similar to [info] method except that the
- * marker data is also taken into consideration.
- *
- * @param marker  the marker data specific to this log statement
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""info(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.info(marker: Marker?, arg: Any?, crossinline message: () -> String) {
-    if (isInfoEnabled)
-        info(marker, message(), arg)
-}
-
-/**
- * This method is similar to [info]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker  the marker data specific to this log statement
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""info(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.info(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isInfoEnabled)
-        info(marker, message(), arg1, arg2)
-}
-
-/**
- * This method is similar to [info]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker    the marker data specific to this log statement
- * @param arguments an array of arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""info(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.info(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
-    if (isInfoEnabled)
-        info(marker, message(), arguments)
-}
-
-/**
  * This method is similar to [info] method
  * except that the marker data is also taken into consideration.
  *
@@ -789,80 +388,6 @@ public inline fun KLogger.warn(crossinline message: () -> String) {
 public inline fun KLogger.warn(crossinline message: () -> Any?) {
     if (isWarnEnabled)
         warn(message().toString())
-}
-
-/**
- * Log a message at the WARN level according to the specified format
- * and argument.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the WARN level.
- *
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""warn { "${"$"}{message()} ${"$"}{arg}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.warn(arg: Any?, crossinline message: () -> String) {
-    if (isWarnEnabled)
-        warn(message(), arg)
-}
-
-/**
- * Log a message at the WARN level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the WARN level.
- *
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""warn { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.warn(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isWarnEnabled)
-        warn(message(), arg1, arg2)
-}
-
-/**
- * Log a message at the WARN level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous string concatenation when the logger
- * is disabled for the WARN level. However, this variant incurs the hidden
- * (and relatively small) cost of creating an `Object[]` before invoking the method,
- * even if this logger is disabled for WARN. The variants taking
- * [one][warn] and [two][warn]
- * arguments exist solely in order to avoid this hidden cost.
- *
- * @param arguments a list of 3 or more arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""warn { "${"$"}{message()} ${"$"}{arguments}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.warn(vararg arguments: Any?, crossinline message: () -> String) {
-    if (isWarnEnabled)
-        warn(message(), *arguments)
 }
 
 /**
@@ -922,66 +447,6 @@ public inline fun KLogger.warn(marker: Marker?, crossinline message: () -> Any?)
 }
 
 /**
- * This method is similar to [warn] method except that the
- * marker data is also taken into consideration.
- *
- * @param marker  the marker data specific to this log statement
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""warn(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.warn(marker: Marker?, arg: Any?, crossinline message: () -> String) {
-    if (isWarnEnabled)
-        warn(marker, message(), arg)
-}
-
-/**
- * This method is similar to [warn]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker  the marker data specific to this log statement
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""warn(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.warn(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isWarnEnabled)
-        warn(marker, message(), arg1, arg2)
-}
-
-/**
- * This method is similar to [warn]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker    the marker data specific to this log statement
- * @param arguments an array of arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""warn(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.warn(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
-    if (isWarnEnabled)
-        warn(marker, message(), arguments)
-}
-
-/**
  * This method is similar to [warn] method
  * except that the marker data is also taken into consideration.
  *
@@ -1038,80 +503,6 @@ public inline fun KLogger.error(crossinline message: () -> Any?) {
 }
 
 /**
- * Log a message at the ERROR level according to the specified format
- * and argument.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the ERROR level.
- *
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""error { "${"$"}{message()} ${"$"}{arg}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.error(arg: Any?, crossinline message: () -> String) {
-    if (isErrorEnabled)
-        error(message(), arg)
-}
-
-/**
- * Log a message at the ERROR level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous object creation when the logger
- * is disabled for the ERROR level.
- *
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""error { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.error(arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isErrorEnabled)
-        error(message(), arg1, arg2)
-}
-
-/**
- * Log a message at the ERROR level according to the specified format
- * and arguments.
- *
- *
- *
- * This form avoids superfluous string concatenation when the logger
- * is disabled for the ERROR level. However, this variant incurs the hidden
- * (and relatively small) cost of creating an `Object[]` before invoking the method,
- * even if this logger is disabled for ERROR. The variants taking
- * [one][error] and [two][error]
- * arguments exist solely in order to avoid this hidden cost.
- *
- * @param arguments a list of 3 or more arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""error { "${"$"}{message()} ${"$"}{arguments}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.error(vararg arguments: Any?, crossinline message: () -> String) {
-    if (isErrorEnabled)
-        error(message(), *arguments)
-}
-
-/**
  * Log an exception (throwable) at the ERROR level with an
  * accompanying message.
  *
@@ -1165,66 +556,6 @@ public inline fun KLogger.error(marker: Marker?, crossinline message: () -> Stri
 public inline fun KLogger.error(marker: Marker?, crossinline message: () -> Any?) {
     if (isErrorEnabled)
         error(message().toString(), marker)
-}
-
-/**
- * This method is similar to [error] method except that the
- * marker data is also taken into consideration.
- *
- * @param marker  the marker data specific to this log statement
- * @param arg     the argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""error(marker) { "${"$"}{message()} ${"$"}{arg}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.error(marker: Marker?, arg: Any?, crossinline message: () -> String) {
-    if (isErrorEnabled)
-        error(marker, message(), arg)
-}
-
-/**
- * This method is similar to [error]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker  the marker data specific to this log statement
- * @param arg1    the first argument
- * @param arg2    the second argument
- * @param message a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""error(marker) { "${"$"}{message()} ${"$"}{arg1} ${"$"}{arg2}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.error(marker: Marker?, arg1: Any?, arg2: Any?, crossinline message: () -> String) {
-    if (isErrorEnabled)
-        error(marker, message(), arg1, arg2)
-}
-
-/**
- * This method is similar to [error]
- * method except that the marker data is also taken into
- * consideration.
- *
- * @param marker    the marker data specific to this log statement
- * @param arguments an array of arguments
- * @param message   a lazy evaluated block providing the format string to be logged
- */
-@JvmSynthetic
-@Deprecated(
-    message = "Use kotlin string templates instead.",
-    replaceWith = ReplaceWith("""error(marker) { "${"$"}{message()} ${"$"}{arguments}" }"""),
-    level = DeprecationLevel.ERROR,
-)
-public inline fun KLogger.error(marker: Marker?, vararg arguments: Any?, crossinline message: () -> String) {
-    if (isErrorEnabled)
-        error(marker, message(), arguments)
 }
 
 /**
