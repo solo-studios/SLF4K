@@ -1,9 +1,9 @@
 /*
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
- * Copyright (c) 2021-2022 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2021-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 20-11-2022 03:49 p.m.
+ * Last modified on 10-01-2023 01:49 p.m.
  *
  * MIT License
  *
@@ -41,18 +41,34 @@ plugins {
     signing
     `java-library`
     `maven-publish`
-    kotlin("jvm") version "1.7.10"
-    id("org.jetbrains.dokka") version "1.7.20"
-    id("org.jmailen.kotlinter") version "3.11.1"
-    id("com.google.devtools.ksp") version "1.7.20-1.0.7"
+    
+    alias(libs.plugins.axion.release)
+    
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.dokka)
+    
+    alias(libs.plugins.kotlinter)
+}
+
+scmVersion {
+    // configure scmVersion here
 }
 
 group = "ca.solo-studios"
-val versionObj = Version("0", "5", "1")
-version = versionObj.toString()
+version = scmVersion.version
 
 repositories {
+    maven("https://maven.solo-studios.ca/releases/")
     mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    
+    withSourcesJar()
+    withJavadocJar()
 }
 
 kotlin {
@@ -84,25 +100,27 @@ kotlinter {
     )
 }
 
-val slf4jVersion = "2.0.3"
-val kotlinxCoroutinesVersion = "1.6.4"
-
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation(kotlin("reflect"))
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.reflect)
     
-    api("org.slf4j:slf4j-api:$slf4jVersion")
+    api(libs.slf4j)
     
-    compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
-    // compileOnlyApi("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.6.4")
+    compileOnlyApi(libs.kotlinx.coroutines)
+    compileOnlyApi(libs.kotlinx.coroutines.slf4j)
     
-    kspTest("ca.solo-studios:ksp-service-annotation:1.0.1")
-    kspTest("com.squareup:kotlinpoet:1.12.0") // idk why this isn't being included
-    testCompileOnly("ca.solo-studios:ksp-service-annotation:1.0.1")
+    kspTest(libs.ksp.service)
+    testCompileOnly(libs.ksp.service)
     
-    testImplementation(kotlin("test"))
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
-    testImplementation("org.slf4j:slf4j-simple:$slf4jVersion")
+    
+    testImplementation(libs.slf4j.simple)
+    
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlinx.coroutines)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.kotlinx.coroutines.debug)
+    
+    testImplementation(libs.bundles.junit)
 }
 
 tasks {
@@ -164,13 +182,13 @@ tasks {
 
 val processDokkaIncludes by tasks.register("processDokkaIncludes", ProcessResources::class) {
     from(projectDir.resolve("dokka/includes")) {
-        val projectInfo = ProjectInfo(project.group.toString(), project.name, versionObj)
+        val projectInfo = ProjectInfo(project.group.toString(), project.name, version.toString())
         filesMatching("Module.md") {
             expand(
                 "project" to projectInfo,
                 "versions" to mapOf(
-                    "slf4j" to slf4jVersion,
-                    "kotlinxCoroutines" to kotlinxCoroutinesVersion,
+                    "slf4j" to libs.versions.slf4j.get(),
+                    "kotlinxCoroutines" to libs.versions.kotlinx.coroutines.get(),
                 ),
             )
         }
@@ -185,14 +203,14 @@ val javadoc by tasks.getting(Javadoc::class)
 
 val jar by tasks.getting(Jar::class)
 
-val javadocJar by tasks.registering(Jar::class) {
+val javadocJar by tasks.getting(Jar::class) {
     dependsOn(dokkaHtml)
     from(dokkaHtml.outputDirectory)
     archiveClassifier.set("javadoc")
     group = JavaBasePlugin.DOCUMENTATION_GROUP
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
+val sourcesJar by tasks.getting(Jar::class) {
     from(sourceSets["main"].allSource)
     archiveClassifier.set("sources")
     group = JavaBasePlugin.DOCUMENTATION_GROUP
@@ -207,18 +225,21 @@ artifacts {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            artifact(jar)
-            artifact(sourcesJar)
-            artifact(javadocJar)
+            from(components["java"])
     
             version = version as String
             groupId = group as String
             artifactId = "slf4k"
     
             pom {
+                val projectOrg = "solo-studios"
+                val projectRepo = "SLF4K"
+                val githubBaseUri = "github.com/$projectOrg/$projectRepo"
+                val githubUrl = "https://$githubBaseUri"
+        
                 name.set("SLF4K")
                 description.set("A set of SLF4J extensions for Kotlin to make logging more idiomatic.")
-                url.set("https://github.com/solo-studios/SLF4K")
+                url.set(githubUrl)
         
                 inceptionYear.set("2021")
         
@@ -238,12 +259,12 @@ publishing {
                 }
                 issueManagement {
                     system.set("GitHub")
-                    url.set("https://github.com/solo-studios/SLF4K/issues")
+                    url.set("$githubUrl/issues")
                 }
                 scm {
-                    connection.set("scm:git:https://github.com/solo-studios/SLF4K.git")
-                    developerConnection.set("scm:git:ssh://github.com/solo-studios/SLF4K.git")
-                    url.set("https://github.com/solo-studios/SLF4K/")
+                    connection.set("scm:git:$githubUrl.git")
+                    developerConnection.set("scm:git:ssh://$githubBaseUri.git")
+                    url.set(githubUrl)
                 }
             }
         }
@@ -251,14 +272,25 @@ publishing {
     
     repositories {
         maven {
-            name = "sonatypeStaging"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2")
-            credentials(org.gradle.api.credentials.PasswordCredentials::class)
+            name = "Sonatype"
+    
+            val releasesUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") // releases repo
+            val snapshotUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/") // snapshot repo
+            url = if (isSnapshot) snapshotUrl else releasesUrl
+    
+            credentials(PasswordCredentials::class)
         }
         maven {
-            name = "sonatypeSnapshot"
-            url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            name = "SoloStudios"
+    
+            val releasesUrl = uri("https://maven.solo-studios.ca/releases/")
+            val snapshotUrl = uri("https://maven.solo-studios.ca/snapshots/")
+            url = if (isSnapshot) snapshotUrl else releasesUrl
+    
             credentials(PasswordCredentials::class)
+            authentication { // publishing doesn't work without this for some reason
+                create<BasicAuthentication>("basic")
+            }
         }
     }
 }
@@ -268,14 +300,10 @@ signing {
     sign(publishing.publications["maven"])
 }
 
-/**
- * Version class, which does version stuff.
- */
-data class Version(val major: String, val minor: String, val patch: String) {
-    override fun toString(): String = "$major.$minor.$patch"
-}
+val Project.isSnapshot: Boolean
+    get() = version.toString().endsWith("-SNAPSHOT")
 
 /**
  * Project info class for [processDokkaIncludes].
  */
-data class ProjectInfo(val group: String, val module: String, val version: Version)
+data class ProjectInfo(val group: String, val module: String, val version: String)

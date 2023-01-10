@@ -1,0 +1,58 @@
+[versions]
+kotlin = "1.8.0"
+ksp = "1.8.0-1.0.8"
+dokka = "1.7.20" # usually the same as kotlin version
+kotlinx-coroutines = "1.6.4"
+junit-jupiter = "5.9.1"
+axiom-release = "1.14.3"
+kotlinter = "3.13.0"
+slf4j = "2.0.6"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+
+axion-release = { id = "pl.allegro.tech.build.axion-release", version.ref = "axiom-release" }
+
+kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
+
+[libraries]
+
+# Kotlin stdlib
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+
+# Kotlinx Coroutines
+## Library support for Kotlin coroutines with multiplatform support
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-slf4j = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-slf4j", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-debug = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-debug", version.ref = "kotlinx-coroutines" }
+
+# SLF4J
+## Simple Logging Facade for Java
+slf4j = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
+slf4j-simple = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
+
+# KSP Service Annotation
+## An annotation based generator for java the ServiceProvider META-INF configuration
+ksp-service = { group = "ca.solo-studios", name = "ksp-service-annotation", version = "1.0.4" }
+
+# JUnit
+## Unit testing framework for Java
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit-jupiter" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit-jupiter" }
+junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit-jupiter" }
+
+[bundles]
+
+junit = [
+    "junit-jupiter-api",
+    "junit-jupiter-engine",
+    "junit-jupiter-params",
+]
