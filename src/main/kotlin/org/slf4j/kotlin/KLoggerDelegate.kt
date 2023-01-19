@@ -1,9 +1,9 @@
 /*
  * SLF4K - A set of SLF4J extensions for Kotlin to make logging more idiomatic.
- * Copyright (c) 2022-2022 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2022-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file KLoggerDelegate.kt is part of SLF4K
- * Last modified on 20-11-2022 02:45 p.m.
+ * Last modified on 19-01-2023 02:15 p.m.
  *
  * MIT License
  *
@@ -40,7 +40,7 @@ import kotlin.reflect.KProperty
  */
 public class KLoggerDelegate<T>(
         private val loggerNameProvider: () -> String
-) : ReadOnlyProperty<T, KLogger> {
+) : ReadOnlyProperty<T?, KLogger> {
     private val lazyLogger: KLogger by lazy {
         KLogger(LoggerFactory.getLogger(loggerNameProvider()))
     }
@@ -48,7 +48,7 @@ public class KLoggerDelegate<T>(
     /**
      * Lazily retrieves the logger for this delegate.
      */
-    override fun getValue(thisRef: T, property: KProperty<*>): KLogger {
+    override fun getValue(thisRef: T?, property: KProperty<*>): KLogger {
         return lazyLogger
     }
 }
