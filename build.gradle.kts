@@ -3,7 +3,7 @@
  * Copyright (c) 2021-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of SLF4K
- * Last modified on 10-01-2023 01:49 p.m.
+ * Last modified on 19-01-2023 02:11 p.m.
  *
  * MIT License
  *
@@ -152,6 +152,23 @@ tasks {
         }
     }
     
+    val processDokkaIncludes by register("processDokkaIncludes", ProcessResources::class) {
+        from(projectDir.resolve("dokka/includes")) {
+            val projectInfo = ProjectInfo(project.group.toString(), project.name, version.toString())
+            filesMatching("Module.md") {
+                expand(
+                    "project" to projectInfo,
+                    "versions" to mapOf(
+                        "slf4j" to libs.versions.slf4j.get(),
+                        "kotlinxCoroutines" to libs.versions.kotlinx.coroutines.get(),
+                    ),
+                )
+            }
+        }
+        destinationDir = buildDir.resolve("dokka-include")
+        group = JavaBasePlugin.DOCUMENTATION_GROUP
+    }
+    
     withType<DokkaTask>().configureEach {
         dependsOn(processDokkaIncludes)
         
@@ -178,23 +195,6 @@ tasks {
         
         group = JavaBasePlugin.DOCUMENTATION_GROUP
     }
-}
-
-val processDokkaIncludes by tasks.register("processDokkaIncludes", ProcessResources::class) {
-    from(projectDir.resolve("dokka/includes")) {
-        val projectInfo = ProjectInfo(project.group.toString(), project.name, version.toString())
-        filesMatching("Module.md") {
-            expand(
-                "project" to projectInfo,
-                "versions" to mapOf(
-                    "slf4j" to libs.versions.slf4j.get(),
-                    "kotlinxCoroutines" to libs.versions.kotlinx.coroutines.get(),
-                ),
-            )
-        }
-    }
-    destinationDir = buildDir.resolve("dokka-include")
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
 }
 
 val dokkaHtml by tasks.getting(DokkaTask::class)
