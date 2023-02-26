@@ -43,7 +43,9 @@ implementation("ca.solo-studios:slf4k:0.5.3")
 
 ## SLF4J 2.0.0
 
-The current version of SLF4K should be compatible with all versions higher that are greater than 2.0.0.
+The current version of SLF4K should be compatible with all versions that are greater than 2.0.0.
+However, it should still work with versions lower than 2.0.0, so long as you don't use
+the [Fluent Logging](#fluent-logging) extensions.
 
 ## Examples
 
@@ -175,10 +177,12 @@ try {
 }
 ```
 
-### MDC with Coroutines
+## MDC with Coroutines
 
 To pass MDC context between [kotlinx coroutines](https://github.com/Kotlin/kotlinx.coroutines),
 use `kotlinx-coroutines-slf4j`:
+
+### Including
 
 #### Maven
 
@@ -196,8 +200,20 @@ use `kotlinx-coroutines-slf4j`:
 implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoroutinesVersion'
 ```
 
-### Gradle Kotlin DSL
+#### Gradle Kotlin DSL
 
 ```kotlin
 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoroutinesVersion")
+```
+
+### Usage
+
+You can propagate the MDC context through coroutines as follows:
+
+```kt
+MDC.put("kotlin", "rocks") // put a value into the MDC context
+
+launch(MDCContext()) {
+   logger.info { "..." }   // the MDC context will contain the mapping here
+}
 ```
