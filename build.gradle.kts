@@ -32,6 +32,7 @@ import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jmailen.gradle.kotlinter.tasks.InstallPreCommitHookTask
+import pl.allegro.tech.build.axion.release.domain.preRelease
 import java.net.URL
 import java.time.Year
 import kotlin.math.max
@@ -53,6 +54,21 @@ plugins {
 
 scmVersion {
     // configure scmVersion here
+    hooks {
+        preRelease {
+            fileUpdate {
+                file("README.md")
+                pattern = { previousVersion, _ ->
+                    println("previous: $previousVersion")
+                    previousVersion
+                }
+                replacement = { currentVersion, _ ->
+                    println("current: $currentVersion")
+                    currentVersion
+                }
+            }
+        }
+    }
 }
 
 group = "ca.solo-studios"
@@ -226,23 +242,23 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-    
+            
             version = version as String
             groupId = group as String
             artifactId = "slf4k"
-    
+            
             pom {
                 val projectOrg = "solo-studios"
                 val projectRepo = "SLF4K"
                 val githubBaseUri = "github.com/$projectOrg/$projectRepo"
                 val githubUrl = "https://$githubBaseUri"
-        
+                
                 name.set("SLF4K")
                 description.set("A set of SLF4J extensions for Kotlin to make logging more idiomatic.")
                 url.set(githubUrl)
-        
+                
                 inceptionYear.set("2021")
-        
+                
                 licenses {
                     license {
                         name.set("MIT License")
@@ -273,20 +289,20 @@ publishing {
     repositories {
         maven {
             name = "Sonatype"
-    
+            
             val releasesUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") // releases repo
             val snapshotUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/") // snapshot repo
             url = if (isSnapshot) snapshotUrl else releasesUrl
-    
+            
             credentials(PasswordCredentials::class)
         }
         maven {
             name = "SoloStudios"
-    
+            
             val releasesUrl = uri("https://maven.solo-studios.ca/releases/")
             val snapshotUrl = uri("https://maven.solo-studios.ca/snapshots/")
             url = if (isSnapshot) snapshotUrl else releasesUrl
-    
+            
             credentials(PasswordCredentials::class)
             authentication { // publishing doesn't work without this for some reason
                 create<BasicAuthentication>("basic")
