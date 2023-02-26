@@ -32,7 +32,7 @@ import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jmailen.gradle.kotlinter.tasks.InstallPreCommitHookTask
-import pl.allegro.tech.build.axion.release.domain.preRelease
+import pl.allegro.tech.build.axion.release.domain.hooks.HookContext
 import java.net.URL
 import java.time.Year
 import kotlin.math.max
@@ -53,21 +53,21 @@ plugins {
 }
 
 scmVersion {
-    // configure scmVersion here
     hooks {
-        preRelease {
-            fileUpdate {
-                file("README.md")
-                pattern = { previousVersion, _ ->
-                    println("previous: $previousVersion")
-                    previousVersion
-                }
-                replacement = { currentVersion, _ ->
-                    println("current: $currentVersion")
-                    currentVersion
-                }
-            }
-        }
+        pre(
+            "fileUpdate", mapOf(
+                "encoding" to "UTF-8",
+                "file" to file("README.md"),
+                "pattern" to KotlinClosure2({ previousVersion: String, _: HookContext ->
+                                                println("previous: $previousVersion")
+                                                previousVersion
+                                            }),
+                "replacement" to KotlinClosure2({ currentVersion: String, _: HookContext ->
+                                                    println("current: $currentVersion")
+                                                    currentVersion
+                                                })
+            )
+        )
     }
 }
 
